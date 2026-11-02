@@ -9,6 +9,9 @@ A project-focused static portfolio for GitHub Pages with readable typography, a 
 - `resume.html`: printable résumé. Use the page's **Print / Save as PDF** button to export.
 - `assets/favicon.svg`: small code-native identity mark.
 - `assets/profile.jpg`: the photo supplied in the workspace as `ff4e87c4dc2ee0f6adac14937a991b11.jpg`, copied without modification and displayed beside the name. CSS preserves the original aspect ratio.
+- `assets/models/`: eight original SVG system models, reused across all five projects and five publications; every figure can be opened at full size.
+- `scripts/build-system-models.py`: standard-library generator for the shared diagram style.
+- `docs/system-model-sources.md`: paper figures, method sections, and conceptual-overview provenance for each model.
 - `.nojekyll`: serves the repository directly as a static website.
 
 ## Preview locally

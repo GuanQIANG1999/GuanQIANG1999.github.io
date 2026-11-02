@@ -1,0 +1,816 @@
+[
+  {
+    "slug": "healthcare-pipeline",
+    "title": "Healthcare ML pipeline",
+    "description": "Clinical records enter preprocessing, multimodal feature extraction, and risk prediction. Model evaluation produces analysis outputs. Data quality informs preprocessing. Processing runs in a secure HPC environment.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied Mitacs project description"
+    ],
+    "text_checks": [
+      [
+        "Clinical",
+        185,
+        24
+      ],
+      [
+        "records",
+        185,
+        24
+      ],
+      [
+        "Multimodal evidence",
+        185,
+        19
+      ],
+      [
+        "Preprocessing",
+        185,
+        24
+      ],
+      [
+        "Missing data +",
+        185,
+        19
+      ],
+      [
+        "class imbalance",
+        185,
+        19
+      ],
+      [
+        "Multimodal",
+        185,
+        24
+      ],
+      [
+        "features",
+        185,
+        24
+      ],
+      [
+        "Available evidence",
+        185,
+        19
+      ],
+      [
+        "Risk",
+        185,
+        24
+      ],
+      [
+        "prediction",
+        185,
+        24
+      ],
+      [
+        "Clinical risk models",
+        185,
+        19
+      ],
+      [
+        "Evaluation",
+        185,
+        24
+      ],
+      [
+        "Model performance",
+        185,
+        19
+      ],
+      [
+        "Analysis",
+        185,
+        24
+      ],
+      [
+        "outputs",
+        185,
+        24
+      ],
+      [
+        "Model outputs",
+        185,
+        19
+      ],
+      [
+        "Data quality",
+        185,
+        24
+      ],
+      [
+        "Availability + balance",
+        185,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "edge-llm",
+    "title": "LLM inference at the wireless edge",
+    "description": "A prompt is processed by prefix layers on a device, intermediate activations pass over a wireless link, and remaining layers execute at the edge. A value-aware policy controls the split point and computing/communication resources.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied LLM inference project and manuscript description; full manuscript not supplied"
+    ],
+    "text_checks": [
+      [
+        "Device",
+        200,
+        24
+      ],
+      [
+        "LLM prefix layers",
+        200,
+        19
+      ],
+      [
+        "Wireless link",
+        200,
+        24
+      ],
+      [
+        "Intermediate",
+        200,
+        19
+      ],
+      [
+        "activations",
+        200,
+        19
+      ],
+      [
+        "Wireless edge",
+        200,
+        24
+      ],
+      [
+        "Remaining LLM layers",
+        200,
+        19
+      ],
+      [
+        "Inference",
+        200,
+        24
+      ],
+      [
+        "request",
+        200,
+        24
+      ],
+      [
+        "Prompt",
+        200,
+        19
+      ],
+      [
+        "Value-aware policy",
+        280,
+        24
+      ],
+      [
+        "Resources + split point",
+        280,
+        19
+      ],
+      [
+        "LLM response",
+        200,
+        24
+      ],
+      [
+        "Generated output",
+        200,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "federated-partitioning",
+    "title": "Resource-aware federated learning",
+    "description": "A JCRALP controller selects each client's layer partition and server CPU share. Heterogeneous clients retain local data and prefix layers, while corresponding server branches process remaining layers. Activations and gradients cross the split.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "paper",
+    "sources": [
+      "Joint Computational Resource Allocation and Layer Partitioning for Federated Learning, Fig. 1; Sec. II-IV, PDF pp. 3-10"
+    ],
+    "text_checks": [
+      [
+        "JCRALP controller",
+        400,
+        24
+      ],
+      [
+        "Split points + server CPU shares",
+        400,
+        19
+      ],
+      [
+        "Optimization / modified TD3",
+        400,
+        19
+      ],
+      [
+        "Server branch 1",
+        240,
+        24
+      ],
+      [
+        "Layers s1+1 .. L",
+        240,
+        19
+      ],
+      [
+        "CPU share f1",
+        240,
+        19
+      ],
+      [
+        "Client 1",
+        240,
+        24
+      ],
+      [
+        "Local layers 1 .. s1",
+        240,
+        19
+      ],
+      [
+        "Private local data",
+        240,
+        19
+      ],
+      [
+        "Server branch 2",
+        240,
+        24
+      ],
+      [
+        "Layers s2+1 .. L",
+        240,
+        19
+      ],
+      [
+        "CPU share f2",
+        240,
+        19
+      ],
+      [
+        "Client 2",
+        240,
+        24
+      ],
+      [
+        "Local layers 1 .. s2",
+        240,
+        19
+      ],
+      [
+        "Private local data",
+        240,
+        19
+      ],
+      [
+        "Server branch N",
+        240,
+        24
+      ],
+      [
+        "Layers sN+1 .. L",
+        240,
+        19
+      ],
+      [
+        "CPU share fN",
+        240,
+        19
+      ],
+      [
+        "Client N",
+        240,
+        24
+      ],
+      [
+        "Local layers 1 .. sN",
+        240,
+        19
+      ],
+      [
+        "Private local data",
+        240,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "formula-recognition",
+    "title": "Mathematical formula recognition",
+    "description": "Document images pass through formula detection and extraction, symbol and spatial-structure recognition, and conversion to editable LaTeX. An explicitly illustrative fraction conversion is shown below the workflow.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied undergraduate innovation project description"
+    ],
+    "text_checks": [
+      [
+        "Document",
+        185,
+        24
+      ],
+      [
+        "image",
+        185,
+        24
+      ],
+      [
+        "Visual math",
+        185,
+        19
+      ],
+      [
+        "content",
+        185,
+        19
+      ],
+      [
+        "Formula",
+        185,
+        24
+      ],
+      [
+        "detection",
+        185,
+        24
+      ],
+      [
+        "Extract math",
+        185,
+        19
+      ],
+      [
+        "regions",
+        185,
+        19
+      ],
+      [
+        "Structure",
+        185,
+        24
+      ],
+      [
+        "recognition",
+        185,
+        24
+      ],
+      [
+        "Symbols + spatial",
+        185,
+        19
+      ],
+      [
+        "relationships",
+        185,
+        19
+      ],
+      [
+        "LaTeX output",
+        185,
+        24
+      ],
+      [
+        "Editable",
+        185,
+        19
+      ],
+      [
+        "expression",
+        185,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "commerce-automation",
+    "title": "Enterprise procurement automation",
+    "description": "Internal procurement users interact with a Java/Spring Boot application connected to a SQL data store. The application supports quotations, invoicing, and supplier management. This is a conceptual workflow rather than a detailed implementation specification.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied NS Solutions project description"
+    ],
+    "text_checks": [
+      [
+        "Internal users",
+        200,
+        24
+      ],
+      [
+        "Procurement tasks",
+        200,
+        19
+      ],
+      [
+        "Spring Boot app",
+        270,
+        24
+      ],
+      [
+        "Java business logic",
+        270,
+        19
+      ],
+      [
+        "SQL data store",
+        200,
+        24
+      ],
+      [
+        "Business records",
+        200,
+        19
+      ],
+      [
+        "Quotations",
+        240,
+        24
+      ],
+      [
+        "Quotation workflows",
+        240,
+        19
+      ],
+      [
+        "Invoicing",
+        240,
+        24
+      ],
+      [
+        "Invoice workflows",
+        240,
+        19
+      ],
+      [
+        "Suppliers",
+        240,
+        24
+      ],
+      [
+        "Supplier management",
+        240,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "crs-triage",
+    "title": "CRS-Triage",
+    "description": "Structured clinical values with a missingness mask and clinical text enter separate encoders and evidence heads. Modality reliability, uncertainty, and cross-modal consistency guide evidential fusion and class probabilities. A confidence score is compared with a threshold: predict acuity for sufficiently confident cases or defer the case for assessment. Under-triage receives a larger training penalty.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "paper",
+    "sources": [
+      "CRS-Triage, Fig. 1 and Method, PDF pp. 3-5"
+    ],
+    "text_checks": [
+      [
+        "Structured data",
+        185,
+        24
+      ],
+      [
+        "Clinical values +",
+        185,
+        19
+      ],
+      [
+        "missingness mask",
+        185,
+        19
+      ],
+      [
+        "Clinical text",
+        185,
+        24
+      ],
+      [
+        "Clinical notes",
+        185,
+        19
+      ],
+      [
+        "Structured",
+        185,
+        24
+      ],
+      [
+        "encoder + head",
+        185,
+        24
+      ],
+      [
+        "Evidence +",
+        185,
+        19
+      ],
+      [
+        "uncertainty",
+        185,
+        19
+      ],
+      [
+        "Text encoder",
+        185,
+        24
+      ],
+      [
+        "evidence head",
+        185,
+        24
+      ],
+      [
+        "Evidence +",
+        185,
+        19
+      ],
+      [
+        "uncertainty",
+        185,
+        19
+      ],
+      [
+        "Evidence",
+        175,
+        24
+      ],
+      [
+        "fusion",
+        175,
+        24
+      ],
+      [
+        "Modality reliability",
+        175,
+        19
+      ],
+      [
+        "Cross-modal",
+        175,
+        19
+      ],
+      [
+        "consistency",
+        175,
+        19
+      ],
+      [
+        "Class",
+        175,
+        24
+      ],
+      [
+        "probabilities",
+        175,
+        24
+      ],
+      [
+        "Confidence",
+        180,
+        24
+      ],
+      [
+        "gate",
+        180,
+        24
+      ],
+      [
+        "Compare s with tau",
+        180,
+        19
+      ],
+      [
+        "Predict acuity",
+        180,
+        24
+      ],
+      [
+        "s >= tau",
+        180,
+        19
+      ],
+      [
+        "Defer case",
+        180,
+        24
+      ],
+      [
+        "s < tau",
+        180,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "vehicular-llm",
+    "title": "Personalized vehicular health diagnosis",
+    "description": "Vehicle sensor data and driver profiles feed an on-board lightweight LLM. A compact query traverses an NTN connection to server-side query augmentation and knowledge retrieval, then a cloud LLM produces personalized guidance. The action module conveys warnings. Driver and expert review curate feedback into the knowledge base for future retrieval.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "paper",
+    "sources": [
+      "Personalized Vehicular Health Diagnosis via Large Language Model, Fig. 2-3 and Methodology, PDF pp. 3-5"
+    ],
+    "text_checks": [
+      [
+        "Vehicle data",
+        185,
+        24
+      ],
+      [
+        "Sensors + driver",
+        185,
+        19
+      ],
+      [
+        "profile",
+        185,
+        19
+      ],
+      [
+        "On-board LLM",
+        185,
+        24
+      ],
+      [
+        "Compact query",
+        185,
+        19
+      ],
+      [
+        "NTN relay",
+        185,
+        24
+      ],
+      [
+        "Satellite connectivity",
+        185,
+        19
+      ],
+      [
+        "Query",
+        185,
+        24
+      ],
+      [
+        "augmentation",
+        185,
+        24
+      ],
+      [
+        "History-aware RAG",
+        185,
+        19
+      ],
+      [
+        "Cloud LLM",
+        185,
+        24
+      ],
+      [
+        "Tailored response",
+        185,
+        19
+      ],
+      [
+        "Action module",
+        185,
+        24
+      ],
+      [
+        "Warnings + guidance",
+        185,
+        19
+      ],
+      [
+        "Human",
+        185,
+        24
+      ],
+      [
+        "feedback",
+        185,
+        24
+      ],
+      [
+        "Driver + expert",
+        185,
+        19
+      ],
+      [
+        "review",
+        185,
+        19
+      ],
+      [
+        "Knowledge",
+        185,
+        24
+      ],
+      [
+        "base",
+        185,
+        24
+      ],
+      [
+        "Curated RAG context",
+        185,
+        19
+      ]
+    ]
+  },
+  {
+    "slug": "split-learning-security",
+    "title": "Secure split-learning admission",
+    "description": "A client's request packet is scored by an AI risk ranker. Low-risk clients receive a risk-adapted Hashcash challenge. A correct and timely client solution admits the client to split learning. High-risk requests and invalid or late solutions enter a blocklist. The offline ranker pipeline uses CIC-IDS2017, recursive feature elimination, and TVAE-based data augmentation.",
+    "width": 1000,
+    "height": 600,
+    "source_type": "paper",
+    "sources": [
+      "Security and Efficiency Enhancement for Split Learning, Fig. 1-2 and Sec. III, PDF pp. 2-4"
+    ],
+    "text_checks": [
+      [
+        "Client",
+        185,
+        24
+      ],
+      [
+        "request",
+        185,
+        24
+      ],
+      [
+        "Network packet",
+        185,
+        19
+      ],
+      [
+        "AI risk",
+        185,
+        24
+      ],
+      [
+        "ranking",
+        185,
+        24
+      ],
+      [
+        "P(malicious)",
+        185,
+        19
+      ],
+      [
+        "Hashcash gate",
+        185,
+        24
+      ],
+      [
+        "Risk-adapted puzzle",
+        185,
+        19
+      ],
+      [
+        "Verify client solution",
+        185,
+        19
+      ],
+      [
+        "Admit client",
+        185,
+        24
+      ],
+      [
+        "Split-learning task",
+        185,
+        19
+      ],
+      [
+        "Blocklist",
+        185,
+        24
+      ],
+      [
+        "Deny for a set period",
+        185,
+        19
+      ]
+    ]
+  }
+]
