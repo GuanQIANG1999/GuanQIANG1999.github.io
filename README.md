@@ -1,6 +1,6 @@
 # Guan Qiang — AI / ML Engineering Portfolio
 
-A project-focused static portfolio for GitHub Pages with a restrained professional layout: a compact profile header, blue-gray typography, subtle section dividers, directly visible project contributions, and standard publication citations. No build step, package installation, database, or API key is required.
+A project-focused static portfolio for GitHub Pages with larger, readable typography, a blue-gray profile header, subtle project panels, expanded project context and contributions, and publication summaries. No build step, package installation, database, or API key is required.
 
 ## Files
 
@@ -33,7 +33,7 @@ The page works under a project subdirectory too because local assets use relativ
 
 This portfolio targets AI/ML Engineer opportunities. Project text and résumé facts come from the owner's supplied CV. Publication statuses are retained as supplied; an AAAI 2027 submission is labeled under review, not accepted.
 
-At the owner's request, visible placeholders are retained for project Code and Demo links, publication Paper and Code links, and project results. Resource placeholders are noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. Project descriptions are directly visible as bullet points. Results placeholders share the resource line so that unfinished material stays secondary to the work.
+At the owner's request, visible placeholders are retained for project Code and Demo links, publication Paper and Code links, and project results. Resource placeholders are noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. Project cases explain the problem context, supplied contributions, and engineering relevance; publication summaries describe their topics rather than claiming unverified results. Results placeholders share the resource line so that unfinished material stays secondary to the work.
 
 The homepage uses system fonts and plain HTML/CSS, with no JavaScript, external fonts, runtime dependencies, analytics, or tracking. The separate resume page uses a small inline script for its print button.
 

@@ -11,7 +11,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://guanqiang1999.github.io/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=professional-1">
+  <link rel="stylesheet" href="styles.css?v=professional-2">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -21,6 +21,7 @@
         <div class="profile-text">
           <h1>Guan Qiang</h1>
           <p class="profile-focus">Applied Machine Learning &amp; AI Systems</p>
+          <p class="profile-specialties">Healthcare AI &middot; Efficient LLM inference &middot; Distributed learning</p>
           <p class="affiliation">PhD Candidate, Electrical and Computer Engineering<br>Western University &middot; London, Ontario, Canada</p>
           <p class="profile-links"><a href="mailto:gqiang@uwo.ca">gqiang@uwo.ca</a><span aria-hidden="true">&middot;</span><a href="https://github.com/GuanQIANG1999">GitHub</a><span aria-hidden="true">&middot;</span><a href="resume.html">R&eacute;sum&eacute;</a></p>
         </div>
@@ -31,66 +32,91 @@
 
     <main id="main">
       <section class="introduction" aria-label="Introduction">
-        <p>I build machine learning pipelines and study efficient distributed AI systems. My work spans healthcare data analysis, LLM inference, and backend automation. <strong>I am seeking AI/ML Engineer opportunities.</strong></p>
+        <p class="intro-lead">I build machine learning pipelines and study how to make AI systems reliable and efficient under real-world constraints.</p>
+        <p>As a PhD candidate at Western University, I work across healthcare data analysis, LLM inference, and distributed learning. My experience includes end-to-end ML pipeline development, evaluation with incomplete and imbalanced data, secure HPC deployment, and backend business automation.</p>
+        <p class="opportunity-note"><strong>Seeking AI/ML Engineer opportunities</strong> where I can combine research, experimentation, and practical software development.</p>
       </section>
 
       <section id="work" aria-labelledby="work-title">
         <h2 id="work-title">Projects &amp; Engineering Experience</h2>
+        <p class="section-intro">Selected work, with the problem context, my contribution, and its engineering relevance.</p>
         <article class="project" id="healthcare">
           <h3>Scalable AI System for Healthcare Data Analysis</h3>
           <p class="entry-context">Mitacs Research Project &middot; Jan 2026 &ndash; Present</p>
-          <ul class="contributions"><li>Designed and implemented an end-to-end pipeline for healthcare data preprocessing, multimodal feature extraction, clinical risk prediction, and model evaluation.</li><li>Developed models for incomplete and imbalanced clinical data and deployed the pipeline in a secure high-performance computing environment.</li></ul>
+          <p class="project-overview">Clinical data can be incomplete, imbalanced, and distributed across different types of evidence. The project connects data processing and modeling in an end-to-end healthcare analysis pipeline.</p>
+          <h4>My contribution</h4>
+          <ul class="contributions"><li>Designed and implemented the pipeline from healthcare data preprocessing through model evaluation.</li><li>Integrated multimodal feature extraction and clinical risk prediction, with models developed for incomplete and imbalanced data.</li><li>Deployed the pipeline in a secure high-performance computing environment.</li></ul>
+          <p class="engineering-value"><strong>Engineering relevance.</strong> Connects data preparation, feature extraction, prediction, and evaluation in a workflow that can run in the intended computing environment.</p>
           <p class="project-topics"><strong>Focus:</strong> Applied ML, multimodal data, model evaluation, HPC deployment.</p>
+          <p class="project-note">Related manuscript: CRS-Triage, under review for AAAI 2027.</p>
           <div class="resource-links" aria-label="Project resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Demo link to be added">[Demo]</span><span class="project-result">Results: <span class="pending">To be added.</span></span></div>
         </article>
 
         <article class="project" id="llm-inference">
           <h3>LLM Inference at the Wireless Edge</h3>
           <p class="entry-context">First-author research &middot; Western University &middot; 2026</p>
-          <ul class="contributions"><li>Research on value-aware resource allocation and layer partitioning for LLM inference under computing and communication constraints.</li><li>Investigates how inference computation is divided between devices and the wireless edge.</li></ul>
-          <p class="project-topics"><strong>Focus:</strong> LLM inference, edge computing, resource optimization.</p>
+          <p class="project-overview">LLM inference at the wireless edge has to work within computing and communication constraints. My research examines where model computation should run and how limited resources should be allocated.</p>
+          <h4>My contribution</h4>
+          <ul class="contributions"><li>First-author research on value-aware resource allocation and layer partitioning for LLM inference.</li><li>Studies resource assignment and the division of model execution between devices and the wireless edge as connected decisions.</li></ul>
+          <p class="engineering-value"><strong>Engineering relevance.</strong> Addresses the system decisions behind serving a model: execution placement, resource use, and the constraints of the deployment setting.</p>
+          <p class="project-topics"><strong>Focus:</strong> LLM inference, edge computing, model partitioning, resource optimization.</p>
+          <p class="project-note">Manuscript under review at IEEE Transactions on Vehicular Technology (2026).</p>
           <div class="resource-links" aria-label="Project resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Demo link to be added">[Demo]</span><span class="project-result">Results: <span class="pending">To be added.</span></span></div>
         </article>
 
         <article class="project" id="distributed-learning">
           <h3>Efficient and Secure Distributed Learning</h3>
           <p class="entry-context">First-author research &middot; Western University &middot; 2023 &ndash; 2025</p>
-          <ul class="contributions"><li>Research on joint resource allocation and layer partitioning for distributed deep learning, published in IEEE Internet of Things Journal (2025).</li><li>Studied a machine learning approach to malicious-client detection in split learning, published at IEEE PIMRC (2023).</li></ul>
-          <p class="project-topics"><strong>Focus:</strong> Distributed learning, model partitioning, resource allocation, security.</p>
+          <p class="project-overview">Distributed learning requires coordinating model execution across participating devices. My work examines both the allocation of limited resources and the integrity of clients in collaborative training.</p>
+          <h4>My contribution</h4>
+          <ul class="contributions"><li>First-author research on joint resource allocation and layer partitioning for distributed deep learning, published in IEEE Internet of Things Journal (2025).</li><li>Investigated a machine learning-based approach to detecting malicious clients in split learning, published at IEEE PIMRC (2023).</li></ul>
+          <p class="engineering-value"><strong>Engineering relevance.</strong> Connects model partitioning and resource management with the reliability of participants in distributed AI systems.</p>
+          <p class="project-topics"><strong>Focus:</strong> Distributed learning, split learning, resource allocation, security.</p>
+
           <div class="resource-links" aria-label="Project resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Demo link to be added">[Demo]</span><span class="project-result">Results: <span class="pending">To be added.</span></span></div>
         </article>
 
         <article class="project" id="formula-recognition">
           <h3>Mathematical Formula Detection and Recognition</h3>
           <p class="entry-context">Undergraduate Innovation and Entrepreneurship Project &middot; Sep 2021</p>
-          <ul class="contributions"><li>Developed a computer vision system to detect and extract mathematical formulas from document images.</li><li>Recognized visual structures and symbols and converted the formulas into editable LaTeX expressions.</li></ul>
-          <p class="project-topics"><strong>Focus:</strong> Computer vision, document recognition, LaTeX generation.</p>
+          <p class="project-overview">Mathematical expressions embedded in document images are difficult to edit or reuse. Recognizing them requires understanding the arrangement of symbols as well as the symbols themselves.</p>
+          <h4>My contribution</h4>
+          <ul class="contributions"><li>Developed a computer vision system to detect and extract mathematical formulas from document images.</li><li>Recognized visual structures and symbols, and converted the recognized expressions into editable LaTeX.</li></ul>
+          <p class="engineering-value"><strong>Engineering relevance.</strong> Turns visual mathematical content into structured, editable output that can be reused in documents.</p>
+          <p class="project-topics"><strong>Focus:</strong> Computer vision, document recognition, structured output, LaTeX generation.</p>
+
           <div class="resource-links" aria-label="Project resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Demo link to be added">[Demo]</span><span class="project-result">Results: <span class="pending">To be added.</span></span></div>
         </article>
 
         <article class="project" id="commerce-automation">
           <h3>Commerce Automation System</h3>
           <p class="entry-context">NS Solutions &middot; Shanghai, China &middot; Jun &ndash; Sep 2021</p>
-          <ul class="contributions"><li>Developed a Java-based internal automation tool using Spring Boot and SQL.</li><li>Streamlined quotation, invoicing, and supplier management processes for enterprise procurement.</li></ul>
-          <p class="project-topics"><strong>Technologies:</strong> Java, Spring Boot, SQL.</p>
+          <p class="project-overview">Enterprise procurement connects quotations, invoices, and supplier records. This internal tool supported those related activities within a software workflow.</p>
+          <h4>My contribution</h4>
+          <ul class="contributions"><li>Developed a Java-based internal automation tool using Spring Boot and SQL.</li><li>Implemented support for quotation, invoicing, and supplier management processes to streamline enterprise procurement.</li></ul>
+          <p class="engineering-value"><strong>Engineering relevance.</strong> Applies backend development to a concrete business process, connecting operational needs with software implementation.</p>
+          <p class="project-topics"><strong>Focus:</strong> Java, Spring Boot, SQL, business process automation.</p>
+
           <div class="resource-links" aria-label="Project resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Demo link to be added">[Demo]</span><span class="project-result">Results: <span class="pending">To be added.</span></span></div>
         </article>
       </section>
 
       <section id="research" aria-labelledby="research-title">
         <h2 id="research-title">Publications &amp; Manuscripts</h2>
+        <p class="section-intro">Research in healthcare AI, LLM inference, and distributed learning. Submissions under review are labeled explicitly.</p>
         <ol class="publication-list" reversed>
-          <li><h3>CRS-Triage: Confidence- and Reliability-Aware Selective Triage under Incomplete Clinical Evidence</h3><p><strong>G. Qiang</strong>, Y. Chen, T. Liu, D. Rotenberg, E. H. Kim, and F. Fang.</p><p class="publication-venue">AAAI Conference on Artificial Intelligence, 2027. <span class="publication-status">Under review.</span></p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
-          <li><h3>Value-Aware Resource Allocation and Layer Partitioning for LLM Inference at the Wireless Edge</h3><p><strong>G. Qiang</strong>, X. Xie, F. Fang, D. Cai, and X. Wang.</p><p class="publication-venue">IEEE Transactions on Vehicular Technology, 2026. <span class="publication-status">Under review.</span></p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
-          <li><h3>Personalized Vehicular Health Diagnosis via Large Language Model</h3><p>Y. Chen, <strong>G. Qiang</strong>, X. Xie, B. Wang, D. Cai, M. Diyan, T. Liu, and F. Fang.</p><p class="publication-venue">IEEE Communications Standards Magazine, 2026.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
-          <li><h3>Joint Resource Allocation and Layer Partitioning for Distributed Deep Learning</h3><p><strong>G. Qiang</strong>, F. Fang, H. Chen, and X. Wang.</p><p class="publication-venue">IEEE Internet of Things Journal, 2025.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
-          <li><h3>Security and Efficiency Enhancement for Split Learning: A Machine Learning based Malicious Clients Detection Approach</h3><p><strong>G. Qiang</strong>, F. Fang, and X. Wang.</p><p class="publication-venue">IEEE PIMRC, Toronto, Canada, 2023.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
+          <li><h3>CRS-Triage: Confidence- and Reliability-Aware Selective Triage under Incomplete Clinical Evidence</h3><p><strong>G. Qiang</strong>, Y. Chen, T. Liu, D. Rotenberg, E. H. Kim, and F. Fang.</p><p class="publication-venue">AAAI Conference on Artificial Intelligence, 2027. <span class="publication-status">Under review.</span></p><p class="publication-summary">Selective triage that considers prediction confidence and evidence reliability when clinical information is incomplete.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
+          <li><h3>Value-Aware Resource Allocation and Layer Partitioning for LLM Inference at the Wireless Edge</h3><p><strong>G. Qiang</strong>, X. Xie, F. Fang, D. Cai, and X. Wang.</p><p class="publication-venue">IEEE Transactions on Vehicular Technology, 2026. <span class="publication-status">Under review.</span></p><p class="publication-summary">Value-aware resource assignment and model layer partitioning for inference in wireless-edge systems.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
+          <li><h3>Personalized Vehicular Health Diagnosis via Large Language Model</h3><p>Y. Chen, <strong>G. Qiang</strong>, X. Xie, B. Wang, D. Cai, M. Diyan, T. Liu, and F. Fang.</p><p class="publication-venue">IEEE Communications Standards Magazine, 2026.</p><p class="publication-summary">Explores large language models for personalized vehicular health diagnosis.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
+          <li><h3>Joint Resource Allocation and Layer Partitioning for Distributed Deep Learning</h3><p><strong>G. Qiang</strong>, F. Fang, H. Chen, and X. Wang.</p><p class="publication-venue">IEEE Internet of Things Journal, 2025.</p><p class="publication-summary">Joint resource allocation and model partitioning for distributed deep learning.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
+          <li><h3>Security and Efficiency Enhancement for Split Learning: A Machine Learning based Malicious Clients Detection Approach</h3><p><strong>G. Qiang</strong>, F. Fang, and X. Wang.</p><p class="publication-venue">IEEE PIMRC, Toronto, Canada, 2023.</p><p class="publication-summary">A machine learning-based approach to detecting malicious clients in split learning.</p><div class="resource-links" aria-label="Publication resources"><span class="resource-placeholder" role="link" aria-disabled="true" title="Paper link to be added">[Paper]</span><span class="resource-placeholder" role="link" aria-disabled="true" title="Code link to be added">[Code]</span></div></li>
         </ol>
       </section>
 
       <section id="approach" aria-labelledby="skills-title">
         <h2 id="skills-title">Technical Skills</h2>
-        <dl class="skills-list"><dt>Programming</dt><dd>Python, Java, MATLAB, SQL</dd><dt>Machine learning</dt><dd>PyTorch, Transformers, scikit-learn, federated learning, reinforcement learning, large language models</dd><dt>Data &amp; systems</dt><dd>NumPy, pandas, MLflow, Flask, Gradio, Git, Linux, high-performance computing</dd></dl>
+        <p class="section-intro">Tools and methods I use across data preparation, model development, evaluation, and system implementation.</p>
+        <dl class="skills-list"><dt>Programming</dt><dd>Python, Java, MATLAB, SQL</dd><dt>ML frameworks</dt><dd>PyTorch, Transformers, scikit-learn</dd><dt>Learning &amp; optimization</dt><dd>Federated and distributed learning, reinforcement learning, large language models, model training and inference optimization</dd><dt>Data &amp; experiments</dt><dd>NumPy, pandas, MLflow</dd><dt>Software &amp; systems</dt><dd>Flask, Gradio, Git, Linux, high-performance computing</dd></dl>
       </section>
 
       <section id="about" aria-labelledby="education-title">
@@ -107,7 +133,8 @@
 
       <section id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">Contact</h2>
-        <p>I am seeking AI/ML Engineer opportunities. For roles related to applied ML, healthcare AI, or efficient AI systems, please contact me at <a href="mailto:gqiang@uwo.ca">gqiang@uwo.ca</a>.</p>
+        <p>I am interested in AI/ML engineering roles involving practical model development, data-to-model pipelines, efficient inference, and ML-enabled software. I would welcome the chance to discuss how my research and implementation experience could contribute to your team.</p>
+        <p class="contact-links"><a href="mailto:gqiang@uwo.ca">gqiang@uwo.ca</a><a href="resume.html">View r&eacute;sum&eacute;</a><a href="https://github.com/GuanQIANG1999">GitHub profile</a></p>
       </section>
     </main>
     <footer class="site-footer"><span>Guan Qiang</span><a href="#main">Back to top</a></footer>
