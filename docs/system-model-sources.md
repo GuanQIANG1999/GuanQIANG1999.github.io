@@ -1,6 +1,10 @@
 # System architecture illustrations
 
-Eight original SVG architectures are used in ten places: all five projects and all five publications. Where a project and publication describe the same research, they share the same asset. Every diagram uses a 1200 × 760 canvas, common typography, modules, arrow conventions, and semantic palette.
+The page now displays eight tactile, skeuomorphic illustrations in ten places: all five projects and all five publications. They were created with the built-in image-generation tool, using the first healthcare illustration as the style reference for the remaining topics. Exact generation and correction prompts are retained in `docs/illustration-prompts.json`; asset metadata is in `assets/illustrations/manifest.json`. Generated mathematical decorations in two images were removed with targeted image edits before publication.
+
+The illustrations use devices, servers, chips, records, dials, and storage objects as explanatory metaphors. They do not establish actual hardware inventories, measured deployment topology, production clinical use, or an evaluation result. Labels and captions identify the relevant system concepts. The vehicular study's proposed satellite connectivity remains distinct from its measured local-network prototype in the adjacent study text.
+
+Eight precise SVG architectures remain accessible through **Technical schematic** links under the illustrations. Where a project and publication describe the same research, they share the same illustration and schematic. Every SVG uses a 1200 × 760 canvas, common typography, modules, arrow conventions, and semantic palette.
 
 The diagrams distinguish devices and server hosts, application or model components, data stores, and deployment or trust boundaries. They are architectural views rather than numbered processing steps. Clinical model internals use a model architecture; projects without full implementation specifications use explicitly conceptual logical architectures. Host placement is shown only where supported by the supplied description or paper.
 

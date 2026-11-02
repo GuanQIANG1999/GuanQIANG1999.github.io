@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "healthcare-pipeline",
+    "title": "Healthcare ML pipeline",
+    "labels": [
+      "Clinical evidence",
+      "Secure HPC",
+      "Risk & evaluation"
+    ],
+    "alt": "Tactile miniature clinical folders and records connect to an HPC cluster and model chip, then to a risk-evaluation workstation and output records.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "75a79ad627152af0c445cdbd2d0a76057552cc3709936aa8a60ada02dc20eccb",
+    "file": "assets/illustrations/healthcare-pipeline.webp",
+    "technical_schematic": "assets/models/healthcare-pipeline.svg",
+    "bytes": 163594
+  },
+  {
+    "slug": "edge-llm",
+    "title": "Wireless-edge LLM inference",
+    "labels": [
+      "Device-side model",
+      "Wireless link",
+      "Edge-side model"
+    ],
+    "alt": "A miniature laptop runs the model prefix, linked over wireless communication to an edge server running the remaining model. A central resource-control dial connects to both hosts; a separate cable returns the response.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "3d79e1b99e5933085c8e8d22b26202c0fdb10a40d3ffd7701dc34944d8021537",
+    "file": "assets/illustrations/edge-llm.webp",
+    "technical_schematic": "assets/models/edge-llm.svg",
+    "bytes": 148138
+  },
+  {
+    "slug": "federated-partitioning",
+    "title": "Resource-aware federated learning",
+    "labels": [
+      "Private client data",
+      "Shared server compute",
+      "Joint allocation"
+    ],
+    "alt": "Three miniature client laptops retain private data and prefix layers. Blue and sage cables connect them to a central server with per-client model tails, a shared compute pool, and an allocation dial.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "09aacd7a9e7d12a0a8124a3f7ffb7bd28159edc5c813633a80ece4ae3e2fda71",
+    "file": "assets/illustrations/federated-partitioning.webp",
+    "technical_schematic": "assets/models/federated-partitioning.svg",
+    "bytes": 133672
+  },
+  {
+    "slug": "formula-recognition",
+    "title": "Mathematical formula recognition",
+    "labels": [
+      "Document image",
+      "Visual recognition",
+      "Editable LaTeX"
+    ],
+    "alt": "A document and magnifying lens represent formula localization. A recognition workstation, symbol tiles, and a spatial puzzle represent symbol and structure recognition; a connected laptop shows editable LaTeX output.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "6ecfb2cefbedafaa9b0fbb2bc6f58822c7457cb66204a81ce75a4d0702bb8f59",
+    "file": "assets/illustrations/formula-recognition.webp",
+    "technical_schematic": "assets/models/formula-recognition.svg",
+    "bytes": 144934
+  },
+  {
+    "slug": "commerce-automation",
+    "title": "Procurement automation",
+    "labels": [
+      "Internal users",
+      "Spring Boot application",
+      "SQL records"
+    ],
+    "alt": "An internal-user workstation connects to an application server surrounded by quotation, invoicing, and supplier-record objects. Separate cables link the application to a SQL storage canister.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "196af584c35f9700944d8fa63d6ef4d8de5666569405dd4b98b5b821003fe5b5",
+    "file": "assets/illustrations/commerce-automation.webp",
+    "technical_schematic": "assets/models/commerce-automation.svg",
+    "bytes": 119320
+  },
+  {
+    "slug": "crs-triage",
+    "title": "CRS-Triage",
+    "labels": [
+      "Clinical evidence",
+      "Reliability-aware fusion",
+      "Predict or defer"
+    ],
+    "alt": "Structured clinical records and text notes connect through separate model chips to a central fusion assembly and a reliability dial. Branching outputs reach an acuity card or a review clipboard, representing prediction or deferral.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "9258725e300728b8375b2df5d2354e9e5bfebf1de87e7abae7aed0ad9f9e1799",
+    "file": "assets/illustrations/crs-triage.webp",
+    "technical_schematic": "assets/models/crs-triage.svg",
+    "bytes": 133106
+  },
+  {
+    "slug": "vehicular-llm",
+    "title": "Vehicular LLM diagnosis",
+    "labels": [
+      "On-board intelligence",
+      "Communication network",
+      "Cloud diagnosis"
+    ],
+    "alt": "A miniature vehicle with on-board intelligence connects through a wireless-network and satellite concept to cloud diagnosis services. A knowledge store, history notebook, and expert-review clipboard support retrieval and curated feedback.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "dfc16ae1211907424cca83948df13bc96d6ec53d2a18127973efb698d45b58c0",
+    "file": "assets/illustrations/vehicular-llm.webp",
+    "technical_schematic": "assets/models/vehicular-llm.svg",
+    "bytes": 135786
+  },
+  {
+    "slug": "split-learning-security",
+    "title": "Secure split-learning admission",
+    "labels": [
+      "Client requests",
+      "Admission gateway",
+      "Protected training"
+    ],
+    "alt": "A client laptop sends requests to a physical admission gate with a risk-ranking chip and timed proof-of-work token. Rejected requests enter a side tray; admitted requests reach a protected training server. Offline training materials supply the ranker.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "skeuomorphic-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_sha256": "5ad0dadd9f7e30437ddefaf0aa6419b3be23d432b467995f681fdc08cf878dbe",
+    "file": "assets/illustrations/split-learning-security.webp",
+    "technical_schematic": "assets/models/split-learning-security.svg",
+    "bytes": 138668
+  }
+]

@@ -1,6 +1,6 @@
 # Guan Qiang — AI / ML Engineering Portfolio
 
-A project-focused static portfolio for GitHub Pages with readable typography, a blue-gray profile sidebar on wide screens, responsive project panels, expanded project context and contributions, and linked publications. No build step, package installation, database, or API key is required.
+A project-focused static portfolio for GitHub Pages with readable typography, a warm ivory and sage palette, a larger photo in a paper-style frame, tactile system illustrations, expanded project contributions, and linked publications. No build step, package installation, database, or API key is required to serve the site.
 
 ## Files
 
@@ -8,8 +8,11 @@ A project-focused static portfolio for GitHub Pages with readable typography, a 
 - `styles.css`: responsive layout, typography, and print styles.
 - `resume.html`: printable résumé. Use the page's **Print / Save as PDF** button to export.
 - `assets/favicon.svg`: small code-native identity mark.
-- `assets/profile.jpg`: the photo supplied in the workspace as `ff4e87c4dc2ee0f6adac14937a991b11.jpg`, copied without modification and displayed beside the name. CSS preserves the original aspect ratio.
-- `assets/models/`: eight original SVG system architectures, reused across all five projects and five publications; every figure can be opened at full size.
+- `assets/profile.jpg`: the supplied photo, copied without modification. A larger paper-style frame preserves the entire image and its original aspect ratio.
+- `assets/illustrations/`: eight generated skeuomorphic system illustrations, used in ten places. WebP assets preserve the full 1536 × 1024 composition, use lazy loading, and total about 1.1 MiB.
+- `assets/models/`: eight precise SVG system architectures, retained behind each illustration's **Technical schematic** link.
+- `scripts/prepare-illustrations.py`: optional Pillow-based asset preparation; converts generated originals to WebP and writes the illustration manifest. No website runtime dependency.
+- `docs/illustration-prompts.json`: exact built-in image-generation and correction prompts.
 - `scripts/build-system-models.py`: standard-library generator for the shared diagram style.
 - `scripts/system-model-catalog.json`: editable titles, accessible descriptions, and source metadata for each architecture.
 - `docs/system-model-sources.md`: paper figures, method sections, and conceptual-overview provenance for each model.
@@ -52,7 +55,7 @@ Checked on 2026-11-02 against Crossref publisher metadata, arXiv, and Western Un
 
 ## Responsive layout
 
-Project cases use full-width rows so that architecture modules remain readable. At 900px and above, the featured project's problem and contribution descriptions form two columns. At 1280px and above, the profile becomes a left sidebar and the main content occupies the wider right column. The page expands up to 1540px, with diagrams capped at 1000px. A compact sidebar variant supports wide screens with limited height; the sidebar stops being sticky below 860px in height.
+Project cases use full-width rows so that system illustrations remain readable. At 900px and above, the featured project's problem and contribution descriptions form two columns. At 1280px and above, the profile occupies a 300px left column, increasing to 320px on wider screens. Its photo frame is 232–248px wide. The sidebar scrolls naturally, allowing room for the larger portrait. Below 640px, the photo is above the profile text and its frame is 176–216px wide. The page expands up to 1540px; illustrations are capped at 1000px.
 
 The homepage uses system fonts and plain HTML/CSS, with no JavaScript, external fonts, runtime dependencies, analytics, or tracking. The separate resume page uses a small inline script for its print button.
 
