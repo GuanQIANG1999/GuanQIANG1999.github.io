@@ -33,7 +33,7 @@ The page works under a project subdirectory too because local assets use relativ
 
 This portfolio targets AI/ML Engineer opportunities. Project text and résumé facts come from the owner's supplied CV. Publication statuses are retained as supplied; an AAAI 2027 submission is labeled under review, not accepted.
 
-At the owner's request, project repository links, demo links, paper links, and quantitative results have not been filled in. There are no disabled buttons, invented performance numbers, or fake dashboards. The visuals are conceptual pipeline diagrams, not experiment results.
+At the owner's request, visible placeholders are retained for project Code and Demo links, publication Paper and Code links, and project results. Resource placeholders are noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. The visuals are conceptual pipeline diagrams, not experiment results.
 
 Google Fonts enhances the typography when available; system fonts are defined as fallbacks. The site otherwise has no runtime dependencies, analytics, or tracking.
 
@@ -47,6 +47,6 @@ Add evidence only after confirming it can be shared publicly:
 4. A real screenshot, architecture diagram, or experiment figure where useful.
 5. Verified paper links and current publication statuses.
 
-To add a project link, put a normal `<a class="text-link">` inside the relevant project's `.project-details`. Avoid linking private repositories or clinical data.
+To enable a resource, replace its `<span class="resource-placeholder" role="link" aria-disabled="true">` with a normal `<a class="text-link" href="VERIFIED_URL">` and remove the placeholder title. Each project and publication has its own resource row. Replace the results placeholder inside a project's expanded details when real evidence is available. Avoid linking private repositories or clinical data.
 
 Update both `index.html` and `resume.html` when changing shared facts. Dates are written explicitly rather than inferred at runtime.
