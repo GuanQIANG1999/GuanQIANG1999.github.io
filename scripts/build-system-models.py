@@ -1,318 +1,355 @@
-"""Build the portfolio's original, editable SVG system-model illustrations.
+"""Build original system-architecture SVGs, with deployment/module boundaries.
 
-No image-generation API or external runtime dependency is required. All diagrams
-share typography, colors, node shapes, arrow conventions, and a 1000 x 600 canvas.
-Source provenance is recorded in docs/system-model-sources.md and the manifest.
+The diagrams identify hosts, application/model components, storage, and data,
+response, and control connections. Source metadata lives in the editable catalog.
+Python standard library only; rendered assets have no website dependencies.
 """
-
-from html import escape
 from pathlib import Path
+from html import escape
 import json
 import math
 import textwrap
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "assets" / "models"
-W, H = 1000, 600
+OUT = ROOT / 'assets/models'
+CATALOG = {m['slug']: m for m in json.loads((ROOT/'scripts/system-model-catalog.json').read_text(encoding='utf-8'))}
+W, H = 1200, 760
 COLORS = {
-    "data": ("#edf4fc", "#b9cfe5", "#365d7f"),
-    "model": ("#f0f1fb", "#c9cee8", "#4e5f85"),
-    "control": ("#fff5e6", "#e6d0ac", "#896638"),
-    "output": ("#eaf6f1", "#b6d9ca", "#397663"),
+    'data': ('#edf4fc', '#bed1e5', '#355c7c'),
+    'model': ('#f0f1fb', '#c8cde6', '#4b5e84'),
+    'control': ('#fff5e6', '#e4cda9', '#8a6637'),
+    'output': ('#eaf6f1', '#afd3c4', '#39725f'),
 }
 
 
-def wrap(text, width, font=24):
-    """Conservative wrapping for short, deliberately edited diagram labels."""
-    return textwrap.wrap(text, max(8, int(width / (font * .54))),
-                         break_long_words=False, break_on_hyphens=False)
+def lines(text, width, size):
+    if isinstance(text, list):
+        return text
+    return textwrap.wrap(text, max(7, int(width/(size*.55))), break_long_words=False, break_on_hyphens=False)
 
 
-class Diagram:
-    def __init__(self, slug, title, subtitle, description, source_type, sources):
-        self.slug = slug
-        self.title = title
-        self.subtitle = subtitle
-        self.description = description
-        self.source_type = source_type
-        self.sources = sources
-        self.back = []
-        self.edges = []
-        self.front = []
-        self.text_checks = []
+class Architecture:
+    def __init__(self, slug, subtitle):
+        self.meta = dict(CATALOG[slug]); self.slug = slug; self.subtitle = subtitle
+        self.back, self.edges, self.front = [], [], []
+        self.checks = []
 
-    def text(self, x, y, text, size=22, color="#3e5670", weight=400,
-             anchor="start", layer="front", family="Arial, Helvetica, sans-serif"):
-        getattr(self, layer).append(
-            f'<text x="{x}" y="{y}" font-family="{family}" font-size="{size}" '
-            f'font-weight="{weight}" fill="{color}" text-anchor="{anchor}">{escape(text)}</text>')
+    def text(self, x, y, text, size=21, color='#4f657c', weight=400, anchor='start', layer='front'):
+        getattr(self,layer).append(f'<text x="{x}" y="{y}" font-family="Arial, Helvetica, sans-serif" '
+                                  f'font-size="{size}" font-weight="{weight}" fill="{color}" '
+                                  f'text-anchor="{anchor}">{escape(text)}</text>')
 
-    def node(self, x, y, w, h, title, sub="", kind="model"):
-        assert 20 <= x < W and y >= 105 and x+w <= W-20 and y+h <= 540
-        fill, stroke, ink = COLORS[kind]
-        self.front.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" '
-                          f'rx="14" fill="{fill}" stroke="{stroke}" stroke-width="2"/>')
-        titles = title if isinstance(title, list) else wrap(title, w-24, 24)
-        subs = sub if isinstance(sub, list) else (wrap(sub, w-26, 19) if sub else [])
-        total = len(titles)*28 + len(subs)*23 + (8 if subs else 0)
-        assert total <= h-12, (self.slug, title, total, h)
-        baseline = y + (h-total)/2 + 23
-        for line in titles:
-            self.text(x+w/2, round(baseline, 1), line, 24, ink, 600, "middle")
-            self.text_checks.append((line, w-20, 24))
-            baseline += 28
-        if subs:
-            baseline += 5
-        for line in subs:
-            self.text(x+w/2, round(baseline, 1), line, 19, "#61758a", 400, "middle")
-            self.text_checks.append((line, w-20, 19))
-            baseline += 23
+    def zone(self, x, y, w, h, title, sub='', icon=None):
+        self.back.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="17" '
+                         'fill="#fff" stroke="#c9d6e4" stroke-width="2"/>')
+        self.back.append(f'<path d="M {x+1} {y+66} H {x+w-1}" stroke="#e2e8ef" stroke-width="1.5"/>')
+        self.text(x+20,y+28,title,20,'#35516b',600,layer='back')
+        if sub:self.text(x+20,y+51,sub,16,'#8190a2',layer='back')
+        if icon:self.icon(icon,x+w-59,y+14,38,layer='back')
 
-    def edge(self, points, dashed=False, color="#7891aa", label=None, at=None):
-        if dashed:
-            segments = []
+    def unit(self, x, y, w, h, title, sub='', kind='model'):
+        assert x>=20 and y>=118 and x+w<=1180 and y+h<=663,(self.slug,title,x,y,w,h)
+        fill,stroke,ink=COLORS[kind]
+        self.front.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="11" '
+                          f'fill="{fill}" stroke="{stroke}" stroke-width="1.7"/>')
+        title_lines=lines(title,w-24,22);sub_lines=lines(sub,w-24,17) if sub else []
+        total=26*len(title_lines)+21*len(sub_lines)+(6 if sub_lines else 0)
+        assert total<=h-12,(self.slug,title,total,h)
+        baseline=y+(h-total)/2+21
+        for line in title_lines:
+            self.text(x+w/2,round(baseline,1),line,22,ink,600,'middle')
+            self.checks.append([line,w-20,22,600]);baseline+=26
+        if sub_lines:baseline+=4
+        for line in sub_lines:
+            self.text(x+w/2,round(baseline,1),line,17,'#6a7d90',400,'middle')
+            self.checks.append([line,w-20,17,400]);baseline+=21
+
+    def database(self,x,y,w,h,title,sub=''):
+        self.front.append(f'<path d="M {x} {y+16} V {y+h-16} C {x} {y+h+6} {x+w} {y+h+6} {x+w} {y+h-16} '
+                          f'V {y+16} Z" fill="#edf4fc" stroke="#bcd0e4" stroke-width="1.8"/>')
+        self.front.append(f'<ellipse cx="{x+w/2}" cy="{y+16}" rx="{w/2}" ry="16" '
+                          'fill="#f7faff" stroke="#bcd0e4" stroke-width="1.8"/>')
+        title_lines=lines(title,w-20,21);sub_lines=lines(sub,w-20,16) if sub else []
+        baseline=y+43
+        for t in title_lines:self.text(x+w/2,baseline,t,21,'#3b6284',600,'middle');baseline+=25
+        for t in sub_lines:self.text(x+w/2,baseline+3,t,16,'#6a7f94',400,'middle');baseline+=20
+
+    def icon(self,kind,x,y,size=44,layer='front'):
+        dest=getattr(self,layer);stroke='#7b93aa';s=size
+        if kind=='server':
+            for dy in [0,.32,.64]:
+                dest.append(f'<rect x="{x}" y="{y+s*dy}" width="{s}" height="{s*.25}" rx="3" fill="#edf3fa" stroke="{stroke}" stroke-width="1.4"/>')
+                dest.append(f'<circle cx="{x+s*.17}" cy="{y+s*(dy+.125)}" r="{s*.035}" fill="{stroke}"/>')
+                dest.append(f'<path d="M {x+s*.38} {y+s*(dy+.125)} H {x+s*.85}" stroke="{stroke}"/>')
+        elif kind=='device':
+            dest.append(f'<rect x="{x}" y="{y}" width="{s}" height="{s*.7}" rx="4" fill="#edf3fa" stroke="{stroke}" stroke-width="1.6"/>')
+            dest.append(f'<path d="M {x+s*.5} {y+s*.7} V {y+s*.92} M {x+s*.22} {y+s*.92} H {x+s*.78}" stroke="{stroke}" stroke-width="1.6"/>')
+        elif kind=='network':
+            for r in [.2,.38,.56]:
+                dest.append(f'<path d="M {x+s*(.5-r)} {y+s*.6} Q {x+s*.5} {y+s*(.6-r)} {x+s*(.5+r)} {y+s*.6}" fill="none" stroke="{stroke}" stroke-width="2.2"/>')
+            dest.append(f'<circle cx="{x+s*.5}" cy="{y+s*.72}" r="{s*.055}" fill="{stroke}"/>')
+        elif kind=='satellite':
+            dest.append(f'<rect x="{x+s*.37}" y="{y+s*.25}" width="{s*.26}" height="{s*.42}" rx="5" fill="#dae7f4" stroke="{stroke}" stroke-width="2"/>')
+            for dx in [.02,.7]:
+                dest.append(f'<rect x="{x+s*dx}" y="{y+s*.31}" width="{s*.28}" height="{s*.3}" fill="#c3d6eb" stroke="{stroke}" stroke-width="1.8"/>')
+            dest.append(f'<path d="M {x+s*.5} {y+s*.67} V {y+s*.86} M {x+s*.34} {y+s*.9} Q {x+s*.5} {y+s*.76} {x+s*.66} {y+s*.9}" fill="none" stroke="{stroke}" stroke-width="1.8"/>')
+
+    def client(self,x,y,w,h,title,layers):
+        self.front.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h-17}" rx="11" fill="#edf4fc" stroke="#b9cfe5" stroke-width="2"/>')
+        self.text(x+w/2,y+29,title,21,'#3d6281',600,'middle')
+        for i in range(3):
+            self.front.append(f'<rect x="{x+37+i*42}" y="{y+46}" width="27" height="28" rx="4" fill="#c6d9ee" stroke="#a5bed7"/>')
+        self.text(x+w/2,y+99,layers,17,'#607b96',anchor='middle')
+        self.text(x+w/2,y+122,'Private local data',16,'#7b8fa3',anchor='middle')
+        self.front.append(f'<path d="M {x+w*.43} {y+h-17} V {y+h-3} H {x+w*.25} H {x+w*.75}" fill="none" stroke="#a9bed2" stroke-width="2"/>')
+
+    def branch(self,x,y,w,h,title,components):
+        self.front.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="#f0f1fb" stroke="#c7cde5" stroke-width="1.8"/>')
+        self.text(x+15,y+29,title,20,'#4d5f83',600)
+        for i,label in enumerate(components):
+            cy=y+46+i*48
+            self.front.append(f'<rect x="{x+14}" y="{cy}" width="{w-28}" height="39" rx="6" fill="white" stroke="#d4d9eb"/>')
+            self.text(x+w/2,cy+25,label,17,'#5a6d89',anchor='middle')
+
+    def edge(self,points,kind='data',label=None,at=None):
+        color={'data':'#718eaa','control':'#b08b55','feedback':'#5d9b87'}[kind]
+        if kind=='control':
+            parts=[]
             for (x1,y1),(x2,y2) in zip(points,points[1:]):
-                length=math.hypot(x2-x1,y2-y1)
-                if not length: continue
-                ux,uy=(x2-x1)/length,(y2-y1)/length
-                for distance in range(0,math.ceil(length),13):
-                    stop=min(distance+7,length)
-                    segments.append(f'M {x1+ux*distance:.1f} {y1+uy*distance:.1f} L {x1+ux*stop:.1f} {y1+uy*stop:.1f}')
-            path=' '.join(segments)
-        else:
-            path = "M " + " L ".join(f"{x} {y}" for x, y in points)
-        self.edges.append(f'<path d="{path}" fill="none" stroke="{color}" '
-                          'stroke-width="2.6" stroke-linejoin="round"/>')
-        (x1,y1),(x2,y2)=points[-2:]
-        length=math.hypot(x2-x1,y2-y1)
-        ux,uy=(x2-x1)/length,(y2-y1)/length
-        tx,ty=x2-ux*2,y2-uy*2
-        bx,by=tx-ux*10,ty-uy*10
-        self.edges.append(f'<polygon points="{tx:.1f},{ty:.1f} {bx-uy*5:.1f},{by+ux*5:.1f} '
-                          f'{bx+uy*5:.1f},{by-ux*5:.1f}" fill="{color}"/>')
+                dist=math.hypot(x2-x1,y2-y1)
+                if not dist:continue
+                ux,uy=(x2-x1)/dist,(y2-y1)/dist
+                for t in range(0,math.ceil(dist),13):
+                    stop=min(t+7,dist);parts.append(f'M {x1+ux*t:.1f} {y1+uy*t:.1f} L {x1+ux*stop:.1f} {y1+uy*stop:.1f}')
+            path=' '.join(parts)
+        else:path='M '+' L '.join(f'{x} {y}' for x,y in points)
+        self.edges.append(f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2.4" stroke-linejoin="round"/>')
+        (x1,y1),(x2,y2)=points[-2:];dist=math.hypot(x2-x1,y2-y1);ux,uy=(x2-x1)/dist,(y2-y1)/dist
+        tx,ty=x2-ux*2,y2-uy*2;bx,by=tx-ux*9,ty-uy*9
+        self.edges.append(f'<polygon points="{tx:.1f},{ty:.1f} {bx-uy*4.5:.1f},{by+ux*4.5:.1f} {bx+uy*4.5:.1f},{by-ux*4.5:.1f}" fill="{color}"/>')
         if label:
             assert at
-            width = len(label)*9.6+14
-            self.front.append(f'<rect x="{at[0]-width/2}" y="{at[1]-18}" width="{width}" '
-                              'height="25" rx="5" fill="#f8fafc"/>')
-            self.text(*at, label, 18, "#657b91", anchor="middle")
+            self.text(at[0],at[1],label,16,color,anchor='middle')
 
-    def lane(self, x, y, w, h, label):
-        self.back.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="18" '
-                         'fill="#f7f9fc" stroke="#d5dfe9" stroke-width="1.5" stroke-dasharray="6 5"/>')
-        self.text(x+16, y+26, label, 17, "#798da2", 600, layer="back")
-
-    def note(self, text):
-        lines = wrap(text, 922, 18)
-        assert len(lines) <= 2, (self.slug, lines)
-        for i, line in enumerate(lines):
-            self.text(38, 525+i*22, line, 18, "#718298")
+    def note(self,text):
+        for i,t in enumerate(lines(text,1128,18)):
+            self.text(36,683+i*21,t,18,'#7a8ca0')
 
     def save(self):
-        self.front.insert(0, '<path d="M 30 91 H 970" stroke="#dfe6ee" stroke-width="1.5"/>')
-        self.text(32, 42, self.title, 28, "#29445e", 600)
-        self.text(33, 72, self.subtitle, 19, "#74869a")
-        legend = []
-        for x, (kind, label) in zip([36, 235, 442, 653],
-                                  [("data", "Data / context"), ("model", "Model / compute"),
-                                   ("control", "Policy / control"), ("output", "Decision / output")]):
-            fill, stroke, _ = COLORS[kind]
-            legend.append(f'<rect x="{x}" y="570" width="16" height="16" rx="4" '
-                          f'fill="{fill}" stroke="{stroke}"/>')
-            legend.append(f'<text x="{x+25}" y="584" font-family="Arial, Helvetica, sans-serif" '
-                          f'font-size="17" fill="#78899d">{label}</text>')
-        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
-               f'width="{W}" height="{H}" role="img" aria-labelledby="title desc">'
-               f'<title id="title">{escape(self.title)}</title><desc id="desc">{escape(self.description)}</desc>'
-               '<defs><marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" '
-               'markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto">'
-               '<path d="M 1 1 L 11 6 L 1 11 Z" fill="#7891aa"/></marker></defs>'
-               '<rect x="1" y="1" width="998" height="598" rx="18" fill="#f8fafc" stroke="#e0e7ef"/>'
-               + ''.join(self.back + self.edges + self.front + legend) + '</svg>')
-        path = OUT / f"{self.slug}.svg"
-        path.write_text(svg, encoding="utf-8")
-        return {"slug": self.slug, "title": self.title, "description": self.description,
-                "width": W, "height": H, "source_type": self.source_type,
-                "sources": self.sources, "text_checks": self.text_checks}
+        self.text(34,46,self.meta['title'],30,'#29465f',600)
+        self.text(35,80,self.subtitle,20,'#74899d')
+        self.back.insert(0,'<path d="M 30 104 H 1170" stroke="#dce5ee" stroke-width="1.5"/>')
+        for x,color,label,dash in [(36,'#718eaa','Data / model traffic',False),(420,'#b08b55','Policy / training signals',True),(820,'#5d9b87','Response / feedback',False)]:
+            if dash:
+                path=' '.join(f'M {x+i} 731 H {x+i+7}' for i in range(0,40,13))
+            else:path=f'M {x} 731 H {x+43}'
+            self.front.append(f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2.5"/>')
+            self.text(x+54,737,label,17,'#7c8da0')
+        svg=(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">'
+             f'<title id="title">{escape(self.meta["title"])} - system architecture</title><desc id="desc">{escape(self.meta["description"])}</desc>'
+             '<rect x="1" y="1" width="1198" height="758" rx="20" fill="#f8fafc" stroke="#dfe7ef"/>'
+             +''.join(self.back+self.edges+self.front)+'</svg>')
+        (OUT/f'{self.slug}.svg').write_text(svg,encoding='utf-8')
+        return {**self.meta,'width':W,'height':H,'representation':'system-architecture','text_checks':self.checks}
 
 
 def healthcare():
-    d = Diagram("healthcare-pipeline", "Healthcare ML pipeline", "Project workflow | secure HPC environment",
-                "Clinical records enter preprocessing, multimodal feature extraction, and risk prediction. "
-                "Model evaluation produces analysis outputs. Data quality informs preprocessing. Processing runs in a secure HPC environment.",
-                "project-description", ["Owner-supplied Mitacs project description"])
-    d.lane(258, 119, 724, 385, "SECURE HPC PIPELINE")
-    d.node(30, 171, 205, 126, "Clinical records", ["Multimodal evidence"], "data")
-    d.node(275, 171, 205, 126, "Preprocessing", ["Missing data +", "class imbalance"], "model")
-    d.node(520, 171, 205, 126, ["Multimodal", "features"], ["Available evidence"], "model")
-    d.node(765, 171, 205, 126, "Risk prediction", ["Clinical risk models"], "model")
-    d.node(765, 371, 205, 116, "Evaluation", ["Model performance"], "model")
-    d.node(520, 371, 205, 116, "Analysis outputs", ["Model outputs"], "output")
-    d.node(275, 371, 205, 116, "Data quality", ["Availability + balance"], "control")
-    for a,b in [(235,275),(480,520),(725,765)]: d.edge([(a,234),(b,234)])
-    d.edge([(867,297),(867,371)])
-    d.edge([(765,429),(725,429)])
-    d.edge([(377,371),(377,297)], dashed=True)
-    d.note("Project-level workflow: clinical data processing, modeling, evaluation, and a secure deployment boundary.")
+    d=Architecture('healthcare-pipeline','System architecture | data sources, ML components, and secure deployment')
+    d.zone(28,140,250,482,'Clinical evidence','Input boundary')
+    d.database(50,240,206,112,'Clinical records','Multimodal data')
+    d.unit(50,440,206,112,'Evidence quality',['Missing data','Class imbalance'],'data')
+    d.zone(340,140,832,482,'Secure HPC environment','ML application boundary','server')
+    d.unit(365,237,235,126,'Preprocessing',['Data preparation','Quality handling'],'model')
+    d.unit(640,237,235,126,'Feature extraction',['Multimodal','representations'],'model')
+    d.unit(915,237,232,126,'Risk prediction',['Clinical ML models'],'model')
+    d.unit(390,459,300,112,'Model evaluation',['Performance assessment'],'output')
+    d.database(760,464,350,99,'Analysis outputs','Predictions and evaluation')
+    d.edge([(256,296),(365,296)])
+    d.edge([(256,496),(312,496),(312,333),(365,333)],'control')
+    d.edge([(600,300),(640,300)])
+    d.edge([(875,300),(915,300)])
+    d.edge([(1031,363),(1031,407),(540,407),(540,459)])
+    d.edge([(690,515),(760,515)])
+    d.note('Project-level logical architecture; the HPC boundary identifies the supplied deployment environment.')
     return d
 
 
 def edge_llm():
-    d = Diagram("edge-llm", "LLM inference at the wireless edge", "Conceptual view | layer partitioning + resource allocation",
-                "A prompt is processed by prefix layers on a device, intermediate activations pass over a wireless link, "
-                "and remaining layers execute at the edge. A value-aware policy controls the split point and computing/communication resources.",
-                "project-description", ["Owner-supplied LLM inference project and manuscript description; full manuscript not supplied"])
-    d.node(30, 174, 220, 140, "Device", ["LLM prefix layers"], "model")
-    d.node(390, 174, 220, 140, "Wireless link", ["Intermediate", "activations"], "data")
-    d.node(750, 174, 220, 140, "Wireless edge", ["Remaining LLM layers"], "model")
-    d.node(30, 385, 220, 112, "Inference request", ["Prompt"], "data")
-    d.node(350, 385, 300, 112, "Value-aware policy", ["Resources + split point"], "control")
-    d.node(750, 385, 220, 112, "LLM response", ["Generated output"], "output")
-    d.edge([(250,244),(390,244)])
-    d.edge([(610,244),(750,244)])
-    d.edge([(140,385),(140,314)])
-    d.edge([(860,314),(860,385)])
-    d.edge([(500,385),(500,314)], dashed=True)
-    d.edge([(350,441),(300,441),(300,284),(250,284)], dashed=True)
-    d.edge([(650,441),(700,441),(700,284),(750,284)], dashed=True)
-    d.note("Conceptual overview of value-aware split inference; the submitted manuscript remains under review.")
+    d=Architecture('edge-llm','Conceptual system architecture | device, wireless network, and edge server')
+    d.zone(28,145,330,470,'Device','Local inference boundary','device')
+    d.unit(52,232,282,94,'Request context','Prompt and local inputs','data')
+    d.unit(52,372,282,135,'LLM prefix',['Layers 1 .. s','Device-side execution'],'model')
+    d.unit(52,543,282,58,'Response consumer',kind='output')
+    d.zone(794,145,378,470,'Wireless edge server','Remote inference boundary','server')
+    d.unit(818,232,330,135,'Remaining LLM',['Layers s+1 .. L','Edge-side execution'],'model')
+    d.unit(818,430,330,116,'Inference runtime','Server compute resources','model')
+    d.icon('network',520,205,104)
+    d.text(572,335,'Wireless network',21,'#52728f',600,'middle')
+    d.unit(420,450,300,141,'Value-aware coordinator',['Split points and','resource allocation'],'control')
+    d.edge([(193,326),(193,372)])
+    d.edge([(334,425),(393,425),(393,303),(478,303)])
+    d.edge([(666,303),(818,303)])
+    d.edge([(1148,299),(1186,299),(1186,642),(193,642),(193,601)],'feedback',label='Generated response',at=(895,634))
+    d.edge([(983,430),(983,367)],'control')
+    d.edge([(420,521),(378,521),(378,477),(334,477)],'control')
+    d.edge([(720,521),(773,521),(773,488),(818,488)],'control')
+    d.edge([(570,450),(570,355)],'control')
+    d.note('Conceptual deployment architecture for the under-review manuscript; no specific model or latency result is assumed.')
     return d
 
 
 def allocation():
-    d = Diagram("federated-partitioning", "Resource-aware federated learning", "JCRALP | per-client layer splits and server CPU allocation",
-                "A JCRALP controller selects each client's layer partition and server CPU share. Heterogeneous clients retain local data "
-                "and prefix layers, while corresponding server branches process remaining layers. Activations and gradients cross the split.",
-                "paper", ["Joint Computational Resource Allocation and Layer Partitioning for Federated Learning, Fig. 1; Sec. II-IV, PDF pp. 3-10"])
-    d.node(290, 110, 420, 116, "JCRALP controller", ["Split points + server CPU shares", "Optimization / modified TD3"], "control")
-    d.lane(28, 252, 944, 144, "SERVER")
-    for x, name, suffix in [(46,"1","1"),(370,"2","2"),(694,"N","N")]:
-        cx=x+130
-        d.node(x, 287, 260, 96, f"Server branch {name}", [f"Layers s{suffix}+1 .. L", f"CPU share f{suffix}"], "model")
-        d.node(x, 431, 260, 104, f"Client {name}", [f"Local layers 1 .. s{suffix}", "Private local data"], "data")
-        d.edge([(cx-12,431),(cx-12,383)])
-        d.edge([(cx+12,383),(cx+12,431)], dashed=True)
-        d.edge([(500,226),(500,239),(cx,239),(cx,287)], dashed=True)
-    d.text(500, 558, "Solid: activations | Dashed: gradients or control", 17, "#74889d", anchor="middle")
-    return d
-
-
-def formula():
-    d = Diagram("formula-recognition", "Mathematical formula recognition", "Project workflow | document image to editable LaTeX",
-                "Document images pass through formula detection and extraction, symbol and spatial-structure recognition, "
-                "and conversion to editable LaTeX. An explicitly illustrative fraction conversion is shown below the workflow.",
-                "project-description", ["Owner-supplied undergraduate innovation project description"])
-    for x, title, sub, kind in [(30,"Document image","Visual math content","data"),
-                                (275,"Formula detection","Extract math regions","model"),
-                                (520,"Structure recognition",["Symbols + spatial", "relationships"],"model"),
-                                (765,"LaTeX output","Editable expression","output")]:
-        d.node(x, 171, 205, 136, title, sub, kind)
-    for a,b in [(235,275),(480,520),(725,765)]: d.edge([(a,239),(b,239)])
-    d.back.append('<rect x="275" y="360" width="450" height="145" rx="16" fill="white" stroke="#d9e3ed"/>')
-    d.text(500,390,"Illustrative conversion",19,"#75899e",anchor="middle")
-    d.text(378,430,"a",31,"#3d5672",anchor="middle",family="Georgia, serif")
-    d.front.append('<path d="M 359 439 H 397" stroke="#3d5672" stroke-width="2"/>')
-    d.text(378,477,"b",31,"#3d5672",anchor="middle",family="Georgia, serif")
-    d.edge([(432,446),(493,446)])
-    d.text(602,454,r"\frac{a}{b}",30,"#397663",anchor="middle",family="Consolas, monospace")
-    d.note("Illustrative example: converting a visual mathematical fraction into an editable LaTeX expression.")
-    return d
-
-
-def commerce():
-    d = Diagram("commerce-automation", "Enterprise procurement automation", "Project workflow | Java + Spring Boot + SQL",
-                "Internal procurement users interact with a Java/Spring Boot application connected to a SQL data store. "
-                "The application supports quotations, invoicing, and supplier management. This is a conceptual workflow rather than a detailed implementation specification.",
-                "project-description", ["Owner-supplied NS Solutions project description"])
-    d.node(30,170,220,126,"Internal users",["Procurement tasks"],"data")
-    d.node(355,170,290,126,"Spring Boot app",["Java business logic"],"model")
-    d.node(750,170,220,126,"SQL data store",["Business records"],"data")
-    d.edge([(250,233),(355,233)])
-    d.edge([(645,221),(750,221)])
-    d.edge([(750,252),(645,252)],dashed=True)
-    for x,title,sub in [(30,"Quotations","Quotation workflows"),(370,"Invoicing","Invoice workflows"),(710,"Suppliers","Supplier management")]:
-        d.node(x,389,260,114,title,[sub],"output")
-        d.edge([(500,296),(500,342),(x+130,342),(x+130,389)])
-    d.note("Conceptual application workflow connecting procurement tasks with Java services and SQL records.")
+    d=Architecture('federated-partitioning','System architecture | heterogeneous clients and a shared server compute pool')
+    d.zone(28,140,1144,284,'Central federated-learning server','Shared model-compute boundary','server')
+    d.unit(52,232,280,132,'JCRALP controller',['Layer split points','Server CPU allocation'],'control')
+    d.unit(385,223,760,70,'Shared CPU pool',['Sum of client shares <= server budget'],'control')
+    for x,name in [(385,'1'),(660,'2'),(935,'N')]:
+        d.unit(x,315,210,90,'Server tail '+name,['Layers s'+name+'+1 .. L'],'model')
+        d.edge([(x+105,293),(x+105,315)],'control')
+    d.edge([(332,298),(357,298),(357,255),(385,255)],'control')
+    d.unit(52,490,270,146,'Heterogeneous clients',['Local compute, energy,','and dataset volumes'],'data')
+    for x,name in [(378,'1'),(653,'2'),(928,'N')]:
+        cx=x+112
+        d.client(x,480,224,165,'Client '+name,'Prefix layers 1 .. s'+name)
+        d.edge([(cx-12,480),(cx-12,405)])
+        d.edge([(cx+12,405),(cx+12,480)],'feedback')
+    d.text(52,452,'Client activations to server',17,'#718eaa')
+    d.text(52,476,'Server gradients to clients',17,'#5d9b87')
+    d.note('JCRALP uses optimization for profiled systems or modified TD3 when system parameters are uncertain.')
     return d
 
 
 def crs():
-    d = Diagram("crs-triage", "CRS-Triage", "Reliability-aware evidence fusion and selective prediction",
-                "Structured clinical values with a missingness mask and clinical text enter separate encoders and evidence heads. "
-                "Modality reliability, uncertainty, and cross-modal consistency guide evidential fusion and class probabilities. A confidence score is compared with a threshold: "
-                "predict acuity for sufficiently confident cases or defer the case for assessment. Under-triage receives a larger training penalty.",
-                "paper", ["CRS-Triage, Fig. 1 and Method, PDF pp. 3-5"])
-    d.node(30,150,205,132,["Structured data"],["Clinical values +", "missingness mask"],"data")
-    d.node(30,351,205,132,"Clinical text",["Clinical notes"],"data")
-    d.node(275,150,205,132,["Structured", "encoder + head"],["Evidence +", "uncertainty"],"model")
-    d.node(275,351,205,132,["Text encoder", "evidence head"],["Evidence +", "uncertainty"],"model")
-    d.node(530,233,195,154,["Evidence", "fusion"],["Modality reliability", "Cross-modal", "consistency"],"model")
-    d.node(530,116,195,94,["Class", "probabilities"],kind="output")
-    d.node(770,246,200,128,"Confidence gate",["Compare s with tau"],"control")
-    d.node(770,116,200,94,["Predict acuity"],["s >= tau"],"output")
-    d.node(770,416,200,94,"Defer case",["s < tau"],"output")
-    d.edge([(235,216),(275,216)])
-    d.edge([(235,417),(275,417)])
-    d.edge([(480,216),(505,216),(505,280),(530,280)])
-    d.edge([(480,417),(505,417),(505,341),(530,341)])
-    d.edge([(725,310),(770,310)])
-    d.edge([(627,233),(627,210)])
-    d.edge([(870,246),(870,210)])
-    d.edge([(870,374),(870,416)])
-    d.note("Training jointly considers evidential learning, selective prediction, disagreement, and under-triage penalties.")
+    d=Architecture('crs-triage','Model architecture | modality branches, evidential fusion, and a selective decision interface')
+    d.zone(28,140,210,484,'Encounter inputs','Clinical evidence')
+    d.unit(49,240,168,128,'Structured data',['Values and','missingness mask'],'data')
+    d.unit(49,449,168,100,'Clinical text',['Triage text'],'data')
+    d.zone(280,140,620,484,'CRS-Triage model','Jointly trained multimodal architecture')
+    d.branch(304,235,250,152,'Structured branch',['Value / mask encoder','Structured evidence head'])
+    d.branch(304,441,250,152,'Text branch',['Clinical text encoder','Text evidence head'])
+    d.unit(610,229,266,78,'Fusion weights',['Reliability + agreement'],'control')
+    d.unit(610,341,266,132,'Evidence fusion',['Reliability + uncertainty','Cross-modal consistency'],'model')
+    d.unit(610,523,266,85,'Confidence head',['Selective objective'],'control')
+    d.zone(940,140,232,484,'Decision interface','Probabilities and deferral')
+    d.unit(964,240,184,103,'Class probabilities',['p'],'output')
+    d.unit(964,411,184,120,'Selection gate',['s compared with tau'],'control')
+    d.unit(964,550,184,60,['Predict / defer'],kind='output')
+    d.edge([(217,304),(304,304)])
+    d.edge([(217,499),(304,499)])
+    d.edge([(554,311),(582,311),(582,384),(610,384)])
+    d.edge([(554,517),(582,517),(582,432),(610,432)])
+    d.edge([(743,307),(743,341)],'control')
+    d.edge([(743,473),(743,523)])
+    d.edge([(876,390),(920,390),(920,292),(964,292)])
+    d.edge([(876,566),(920,566),(920,465),(964,465)],'control')
+    d.edge([(1056,343),(1056,411)])
+    d.edge([(1056,531),(1056,550)])
+    d.note('Joint training: evidential learning + triage penalty + selective prediction + cross-modal disagreement.')
+    return d
+
+
+def formula():
+    d=Architecture('formula-recognition','Conceptual architecture | visual recognition components and structured output')
+    d.front.append('<path d="M 40 250 H 170 L 210 290 V 527 H 40 Z" fill="white" stroke="#bbcee2" stroke-width="2"/>')
+    d.front.append('<path d="M 170 250 V 290 H 210" fill="none" stroke="#bbcee2" stroke-width="2"/>')
+    for y in [315,344,458,487]:d.front.append(f'<path d="M 61 {y} H 184" stroke="#dce5ee" stroke-width="5"/>')
+    d.front.append('<rect x="61" y="371" width="123" height="60" rx="5" fill="#edf4fc" stroke="#99b8d6" stroke-dasharray="5 4"/>')
+    d.text(122,410,'a / b',27,'#547592',anchor='middle')
+    d.text(125,563,'Document image',20,'#526f8c',600,'middle')
+    d.zone(270,140,640,484,'Document recognition system','Logical application boundary')
+    d.unit(296,251,250,126,'Formula localizer',['Detection + extraction'],'model')
+    d.branch(580,234,305,152,'Recognition components',['Symbol recognition','2D structure parsing'])
+    d.unit(296,466,589,107,'LaTeX serializer',['Build a structured, editable expression'],'model')
+    d.unit(952,302,220,170,'Editable LaTeX',['Output format example:','\\frac{a}{b}'],'output')
+    d.edge([(210,401),(244,401),(244,314),(296,314)])
+    d.edge([(546,314),(580,314)])
+    d.edge([(732,386),(732,466)])
+    d.edge([(885,519),(929,519),(929,387),(952,387)])
+    d.note('Conceptual module architecture; the fraction illustrates output syntax and is not an accuracy claim.')
+    return d
+
+
+def commerce():
+    d=Architecture('commerce-automation','Conceptual application architecture | users, business modules, and SQL persistence')
+    d.icon('device',80,274,110)
+    d.text(137,437,'Internal users',22,'#4f6d88',600,'middle')
+    d.zone(285,140,615,484,'Java / Spring Boot application','Application boundary')
+    d.unit(315,230,555,83,'Application interface',['Internal procurement requests'],'data')
+    for x,title in [(315,'Quotations'),(510,'Invoicing'),(705,'Suppliers')]:
+        d.unit(x,368,165,117,title,['Business module'],'model')
+        d.edge([(592,313),(592,340),(x+82,340),(x+82,368)])
+    d.unit(315,541,555,65,'SQL persistence access',kind='model')
+    for x in [397,592,787]:d.edge([(x,485),(x,514),(592,514),(592,541)])
+    d.database(950,299,222,182,'SQL data store',['Quotation, invoice,','and supplier records'])
+    d.edge([(190,329),(247,329),(247,271),(315,271)])
+    d.edge([(315,290),(265,290),(265,385),(190,385)],'feedback')
+    d.edge([(870,563),(924,563),(924,363),(950,363)])
+    d.edge([(950,415),(936,415),(936,590),(870,590)],'feedback')
+    d.note('Conceptual application architecture from the project description; no specific UI framework or database engine is assumed.')
     return d
 
 
 def vehicular():
-    d = Diagram("vehicular-llm", "Personalized vehicular health diagnosis", "LLM-OBD | on-board query generation, RAG, and feedback",
-                "Vehicle sensor data and driver profiles feed an on-board lightweight LLM. A compact query traverses an NTN connection to "
-                "server-side query augmentation and knowledge retrieval, then a cloud LLM produces personalized guidance. The action module conveys warnings. "
-                "Driver and expert review curate feedback into the knowledge base for future retrieval.",
-                "paper", ["Personalized Vehicular Health Diagnosis via Large Language Model, Fig. 2-3 and Methodology, PDF pp. 3-5"])
-    top=[(30,"Vehicle data",["Sensors + driver", "profile"],"data"),
-         (275,"On-board LLM",["Compact query"],"model"),
-         (520,"NTN relay",["Satellite connectivity"],"data"),
-         (765,"Query augmentation",["History-aware RAG"],"model")]
-    for x,title,sub,kind in top:d.node(x,171,205,127,title,sub,kind)
-    bottom=[(765,"Cloud LLM",["Tailored response"],"model"),
-            (520,"Action module",["Warnings + guidance"],"output"),
-            (275,"Human feedback",["Driver + expert", "review"],"control"),
-            (30,"Knowledge base",["Curated RAG context"],"data")]
-    for x,title,sub,kind in bottom:d.node(x,371,205,127,title,sub,kind)
-    for a,b in [(235,275),(480,520),(725,765)]:d.edge([(a,234),(b,234)])
-    d.edge([(867,298),(867,371)])
-    for a,b in [(765,725),(520,480),(275,235)]:d.edge([(a,434),(b,434)])
-    d.edge([(30,434),(15,434),(15,126),(867,126),(867,171)])
-    d.text(632,119,"Retrieved context",18,"#74889d",anchor="middle")
-    d.note("Responses return via available terrestrial/NTN links; reviewed feedback curates future retrieval context.")
+    d=Architecture('vehicular-llm','System architecture | vehicle-side intelligence, communication network, and cloud services')
+    d.zone(28,140,360,490,'Vehicle-side system','Jetson Nano prototype','device')
+    d.unit(52,236,146,100,'Sensor inputs',kind='data')
+    d.unit(218,236,146,100,'Driver profile',kind='data')
+    d.unit(52,378,312,100,'On-board query LLM',['Gemma3 1B (prototype)'],'model')
+    d.unit(52,519,312,95,'Action + feedback',['Warnings and driver feedback'],'output')
+    d.zone(782,140,390,490,'Cloud-side services','Server: 3 RTX 3090 GPUs','server')
+    d.unit(805,236,342,113,'Query augmentation + RAG',['Historical queries and context'],'model')
+    d.unit(805,404,342,90,'Response LLM',['LLaMA 30B (prototype)'],'model')
+    d.database(805,541,200,76,'Knowledge base')
+    d.unit(1022,531,125,89,'Review',['Expert','curation'],'control')
+    d.icon('satellite',524,228,140)
+    d.text(595,406,'Communication',23,'#52728e',600,'middle')
+    d.text(595,435,'Terrestrial / NTN',18,'#7890a7',anchor='middle')
+    d.edge([(125,336),(125,378)])
+    d.edge([(291,336),(291,378)])
+    d.edge([(364,414),(437,414),(437,340),(492,340)])
+    d.edge([(697,340),(751,340),(751,280),(805,280)])
+    d.edge([(976,349),(976,404)])
+    d.edge([(805,462),(697,462)],'feedback')
+    d.edge([(492,462),(432,462),(432,555),(364,555)],'feedback')
+    d.edge([(364,588),(412,588),(412,651),(1084,651),(1084,620)],'feedback')
+    d.edge([(976,494),(976,513),(1084,513),(1084,531)],'feedback')
+    d.edge([(1022,575),(1005,575)],'feedback')
+    d.edge([(905,541),(905,516),(768,516),(768,323),(805,323)])
+    d.note('NTN is part of the proposed architecture; the reported hardware prototype used a local-network connection.')
     return d
 
 
 def security():
-    d = Diagram("split-learning-security", "Secure split-learning admission", "Two-stage screening | AI risk ranking + Hashcash verification",
-                "A client's request packet is scored by an AI risk ranker. Low-risk clients receive a risk-adapted Hashcash challenge. "
-                "A correct and timely client solution admits the client to split learning. High-risk requests and invalid or late solutions enter a blocklist. "
-                "The offline ranker pipeline uses CIC-IDS2017, recursive feature elimination, and TVAE-based data augmentation.",
-                "paper", ["Security and Efficiency Enhancement for Split Learning, Fig. 1-2 and Sec. III, PDF pp. 2-4"])
-    d.text(500,132,"Offline ranker training: CIC-IDS2017 > RFE + TVAE > risk scoring",19,"#71869c",anchor="middle")
-    d.node(30,183,205,132,"Client request",["Network packet"],"data")
-    d.node(275,183,205,132,"AI risk ranking",["P(malicious)"],"model")
-    d.node(520,183,205,132,"Hashcash gate",["Risk-adapted puzzle", "Verify client solution"],"control")
-    d.node(765,183,205,132,"Admit client",["Split-learning task"],"output")
-    d.node(520,392,205,110,"Blocklist",["Deny for a set period"],"control")
-    d.edge([(235,249),(275,249)])
-    d.edge([(480,249),(520,249)],label="low risk",at=(500,170))
-    d.edge([(725,249),(765,249)],label="valid + timely",at=(746,170))
-    d.edge([(377,315),(377,447),(520,447)],label="high risk",at=(414,423))
-    d.edge([(622,315),(622,392)],label="invalid / late",at=(705,359))
-    d.note("Risk thresholds, puzzle difficulty, response time, and blocklist duration are configurable policy parameters.")
+    d=Architecture('split-learning-security','System architecture | untrusted client, admission gateway, and protected learning service')
+    d.zone(28,145,260,480,'Client side','Untrusted requests','device')
+    d.unit(52,254,212,118,'Client agent',['Packet sender','Hashcash solver'],'data')
+    d.text(157,504,'Request + proof',20,'#607b96',600,'middle')
+    d.zone(355,145,525,480,'Server admission gateway','Security boundary','server')
+    d.unit(380,240,220,110,'AI risk ranker',['Maliciousness score'],'model')
+    d.unit(635,240,220,110,'Hashcash service',['Challenge + verification'],'control')
+    d.unit(380,436,220,106,'Policy settings',['Risk threshold','Timeout / difficulty'],'control')
+    d.database(635,443,220,102,'Blocklist','Temporary denial')
+    d.zone(945,145,225,300,'Protected server','Split-learning backend')
+    d.icon('server',1014,258,87)
+    d.text(1057,399,'Training service',20,'#4e6b88',600,'middle')
+    d.unit(945,494,225,132,'Offline risk model',['CIC-IDS2017','RFE + TVAE training'],'model')
+    d.edge([(264,282),(324,282),(324,218),(490,218),(490,240)])
+    d.edge([(600,295),(635,295)])
+    d.edge([(855,281),(945,281)],label='Admit',at=(899,265))
+    d.edge([(670,350),(670,390),(310,390),(310,316),(264,316)],'feedback')
+    d.edge([(264,352),(330,352),(330,411),(805,411),(805,350)])
+    d.edge([(380,315),(348,315),(348,579),(745,579),(745,545)],label='High risk',at=(440,570))
+    d.edge([(855,330),(906,330),(906,493),(855,493)])
+    d.text(894,432,'Invalid / late',16,'#718eaa',anchor='end')
+    d.edge([(490,436),(490,350)],'control')
+    d.edge([(600,489),(615,489),(615,369),(701,369),(701,350)],'control')
+    d.edge([(945,557),(922,557),(922,220),(620,220),(620,262),(600,262)],'control')
+    d.note('The gateway uses packet-risk ranking and proof-of-work verification before admitting clients to the learning backend.')
     return d
 
 
-if __name__ == "__main__":
-    OUT.mkdir(parents=True, exist_ok=True)
-    manifest = [make().save() for make in
-                [healthcare, edge_llm, allocation, formula, commerce, crs, vehicular, security]]
-    (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-    print(f"Built {len(manifest)} system models in {OUT}")
+if __name__=='__main__':
+    OUT.mkdir(parents=True,exist_ok=True)
+    manifest=[fn().save() for fn in [healthcare,edge_llm,allocation,formula,commerce,crs,vehicular,security]]
+    (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    print(f'Built {len(manifest)} system architectures in {OUT}')

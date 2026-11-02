@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "healthcare-pipeline",
+    "title": "Healthcare ML pipeline",
+    "description": "Logical system architecture with a clinical-input boundary and a secure HPC deployment boundary. Clinical records and evidence-quality constraints connect to preprocessing, multimodal feature extraction, risk prediction, model evaluation, and stored analysis outputs.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied Mitacs project description"
+    ]
+  },
+  {
+    "slug": "edge-llm",
+    "title": "LLM inference at the wireless edge",
+    "description": "Conceptual architecture with a device host, wireless network, edge-server host, and value-aware coordinator. The device runs LLM prefix layers; the server runs the remaining layers and inference runtime. Data, generated responses, and allocation controls have separate connections.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied LLM inference project and manuscript description; full manuscript not supplied"
+    ]
+  },
+  {
+    "slug": "federated-partitioning",
+    "title": "Resource-aware federated learning",
+    "description": "A central server contains a JCRALP controller, a shared CPU pool, and per-client model tails. Heterogeneous client devices retain private data and prefix layers. Activations travel to the server and gradients return to clients. The controller chooses split points and server CPU shares.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "paper",
+    "sources": [
+      "Joint Computational Resource Allocation and Layer Partitioning for Federated Learning, Fig. 1; Sec. II-IV, PDF pp. 3-10"
+    ]
+  },
+  {
+    "slug": "formula-recognition",
+    "title": "Mathematical formula recognition",
+    "description": "Conceptual document-recognition architecture. A document image enters an application boundary containing a formula localizer, separate symbol-recognition and two-dimensional structure-parsing components, and a LaTeX serializer. Editable LaTeX is the external output; the displayed fraction is only an output-format example.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied undergraduate innovation project description"
+    ]
+  },
+  {
+    "slug": "commerce-automation",
+    "title": "Enterprise procurement automation",
+    "description": "Conceptual application architecture with internal users, a Java/Spring Boot application boundary, and an external SQL data store. The application contains an interface, quotation, invoicing and supplier business modules, and SQL persistence access. Request, response, and storage connections are shown.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "project-description",
+    "sources": [
+      "Owner-supplied NS Solutions project description"
+    ]
+  },
+  {
+    "slug": "crs-triage",
+    "title": "CRS-Triage",
+    "description": "Model architecture separates clinical inputs, jointly trained CRS-Triage components, and the decision interface. Structured values with missingness masks and clinical text have separate encoders and evidence heads. Reliability and agreement guide evidence fusion; class probabilities and a confidence head feed a predict-or-defer selection gate.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "paper",
+    "sources": [
+      "CRS-Triage, Fig. 1 and Method, PDF pp. 3-5"
+    ]
+  },
+  {
+    "slug": "vehicular-llm",
+    "title": "Personalized vehicular health diagnosis",
+    "description": "Vehicle-side and cloud-side architecture connected by a communication network. The Jetson Nano prototype runs Gemma3 1B from sensor and driver-profile inputs. Cloud services include query augmentation, RAG, LLaMA 30B, a knowledge base, and expert curation. Guidance and curated feedback return through separate links. NTN is proposed; the measured prototype used a local network.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "paper",
+    "sources": [
+      "Personalized Vehicular Health Diagnosis via Large Language Model, Fig. 2-3 and Methodology, PDF pp. 3-5"
+    ]
+  },
+  {
+    "slug": "split-learning-security",
+    "title": "Secure split-learning admission",
+    "description": "Security architecture separates an untrusted client, the server admission gateway, protected training service, and offline risk-model training. The gateway contains AI risk ranking, risk-adapted Hashcash verification, policy settings, and a temporary blocklist. Only admitted requests reach the protected backend; offline CIC-IDS2017, RFE, and TVAE training supplies the ranker.",
+    "width": 1200,
+    "height": 760,
+    "source_type": "paper",
+    "sources": [
+      "Security and Efficiency Enhancement for Split Learning, Fig. 1-2 and Sec. III, PDF pp. 2-4"
+    ]
+  }
+]
