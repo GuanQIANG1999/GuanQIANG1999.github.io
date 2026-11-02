@@ -1,6 +1,6 @@
 # Guan Qiang — AI / ML Engineering Portfolio
 
-A project-focused static portfolio for GitHub Pages with a plain document layout: black text on white, simple headings, directly visible project contributions, and standard publication citations. No build step, package installation, database, or API key is required.
+A project-focused static portfolio for GitHub Pages with a restrained professional layout: a compact profile header, blue-gray typography, subtle section dividers, directly visible project contributions, and standard publication citations. No build step, package installation, database, or API key is required.
 
 ## Files
 
