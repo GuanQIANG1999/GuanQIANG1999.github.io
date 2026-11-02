@@ -1,6 +1,6 @@
 # Guan Qiang — AI / ML Engineering Portfolio
 
-A project-focused static portfolio for GitHub Pages with larger, readable typography, a blue-gray profile header, subtle project panels, expanded project context and contributions, and publication summaries. No build step, package installation, database, or API key is required.
+A project-focused static portfolio for GitHub Pages with readable typography, a blue-gray profile sidebar on wide screens, responsive project panels, expanded project context and contributions, and linked publications. No build step, package installation, database, or API key is required.
 
 ## Files
 
@@ -31,9 +31,23 @@ The page works under a project subdirectory too because local assets use relativ
 
 ## Content decisions
 
-This portfolio targets AI/ML Engineer opportunities. Project text and résumé facts come from the owner's supplied CV. Publication statuses are retained as supplied; an AAAI 2027 submission is labeled under review, not accepted.
+This portfolio targets AI/ML Engineer opportunities. Project text and résumé facts come from the owner's supplied CV. Publication statuses are retained as supplied; the AAAI 2027 submission remains labeled under review even though its arXiv preprint is public. The 2025 journal article title was corrected to the registered title, **Joint Computational Resource Allocation and Layer Partitioning for Federated Learning**, on the homepage and résumé.
 
-At the owner's request, visible placeholders are retained for project Code and Demo links, publication Paper and Code links, and project results. Resource placeholders are noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. Project cases explain the problem context, supplied contributions, and engineering relevance; publication summaries describe their topics rather than claiming unverified results. Results placeholders share the resource line so that unfinished material stays secondary to the work.
+At the owner's request, verified paper links are enabled and manuscripts without a public paper link are labeled **Under review / 在投**. Code and Demo placeholders remain noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. Project cases explain the problem context, supplied contributions, and engineering relevance; publication summaries describe their topics rather than claiming unverified results. Results placeholders share the resource line so that unfinished material stays secondary to the work.
+
+## Paper links
+
+Checked on 2026-11-02 against Crossref publisher metadata, arXiv, and Western University's public faculty publication list. Google Scholar restricts automated access to the supplied profile; the profile itself is linked in the header, publication section, and contact section.
+
+- CRS-Triage: [arXiv:2608.03862](https://arxiv.org/abs/2608.03862). Public preprint; AAAI 2027 submission remains under review.
+- Value-Aware Resource Allocation and Layer Partitioning for LLM Inference at the Wireless Edge: no verified public paper URL found; under review as supplied by the owner.
+- Personalized Vehicular Health Diagnosis via Large Language Model: [DOI](https://doi.org/10.1109/MCOMSTD.2026.3674904).
+- Joint Computational Resource Allocation and Layer Partitioning for Federated Learning: [DOI](https://doi.org/10.1109/JIOT.2025.3592155).
+- Security and Efficiency Enhancement for Split Learning: [DOI](https://doi.org/10.1109/PIMRC56721.2023.10293879).
+
+## Responsive layout
+
+Below 900px, the project cases use one column. At 900px and above, the current healthcare project spans the grid and the remaining four projects form two columns. At 1280px and above, the profile becomes a sticky left sidebar and the main content occupies the wider right column. The page expands up to 1540px while keeping paragraph lengths bounded by the project grid. A compact sidebar variant supports wide screens with limited height.
 
 The homepage uses system fonts and plain HTML/CSS, with no JavaScript, external fonts, runtime dependencies, analytics, or tracking. The separate resume page uses a small inline script for its print button.
 
