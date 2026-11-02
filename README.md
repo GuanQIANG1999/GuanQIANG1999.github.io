@@ -8,6 +8,7 @@ A project-focused static portfolio for GitHub Pages with a conventional academic
 - `styles.css`: responsive layout, typography, and print styles.
 - `resume.html`: printable résumé. Use the page's **Print / Save as PDF** button to export.
 - `assets/favicon.svg`: small code-native identity mark.
+- `assets/profile.jpeg`: original portrait from the owner's existing `GuanQIANG1999/CV` repository (`images/GuanQIANG.jpeg`), displayed beside the homepage profile at its original aspect ratio.
 - `.nojekyll`: serves the repository directly as a static website.
 
 ## Preview locally
