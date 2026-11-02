@@ -1,12 +1,11 @@
 # Guan Qiang — AI / ML Engineering Portfolio
 
-A project-focused, accessible static portfolio for GitHub Pages. No build step, package installation, database, or API key is required.
+A project-focused static portfolio for GitHub Pages with a conventional academic layout: white background, single-column sections, consistent project entries, and a numbered publication list. No build step, package installation, database, or API key is required.
 
 ## Files
 
 - `index.html`: homepage, five project case studies, expertise, publications, education, and contact.
-- `styles.css`: responsive layouts, visual system, print styles, and reduced-motion support.
-- `script.js`: progressive project filtering, email copying, and current navigation state.
+- `styles.css`: responsive layout, typography, and print styles.
 - `resume.html`: printable résumé. Use the page's **Print / Save as PDF** button to export.
 - `assets/favicon.svg`: small code-native identity mark.
 - `.nojekyll`: serves the repository directly as a static website.
@@ -33,9 +32,9 @@ The page works under a project subdirectory too because local assets use relativ
 
 This portfolio targets AI/ML Engineer opportunities. Project text and résumé facts come from the owner's supplied CV. Publication statuses are retained as supplied; an AAAI 2027 submission is labeled under review, not accepted.
 
-At the owner's request, visible placeholders are retained for project Code and Demo links, publication Paper and Code links, and project results. Resource placeholders are noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. The visuals are conceptual pipeline diagrams, not experiment results.
+At the owner's request, visible placeholders are retained for project Code and Demo links, publication Paper and Code links, and project results. Resource placeholders are noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Quantitative results are labeled To be added, without invented performance numbers. Project descriptions are directly visible without filtering or expanding cards.
 
-Google Fonts enhances the typography when available; system fonts are defined as fallbacks. The site otherwise has no runtime dependencies, analytics, or tracking.
+The homepage uses system fonts and plain HTML/CSS, with no JavaScript, external fonts, runtime dependencies, analytics, or tracking. The separate resume page uses a small inline script for its print button.
 
 ## Next content pass
 
@@ -47,6 +46,6 @@ Add evidence only after confirming it can be shared publicly:
 4. A real screenshot, architecture diagram, or experiment figure where useful.
 5. Verified paper links and current publication statuses.
 
-To enable a resource, replace its `<span class="resource-placeholder" role="link" aria-disabled="true">` with a normal `<a class="text-link" href="VERIFIED_URL">` and remove the placeholder title. Each project and publication has its own resource row. Replace the results placeholder inside a project's expanded details when real evidence is available. Avoid linking private repositories or clinical data.
+To enable a resource, replace its `<span class="resource-placeholder" role="link" aria-disabled="true">` with a normal `<a href="VERIFIED_URL">` and remove the placeholder title. Each project and publication has its own resource row. Replace a project's results placeholder when real evidence is available. Avoid linking private repositories or clinical data.
 
 Update both `index.html` and `resume.html` when changing shared facts. Dates are written explicitly rather than inferred at runtime.
