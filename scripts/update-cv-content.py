@@ -73,6 +73,9 @@ def education():
 def update_index():
     path = ROOT / 'index.html'
     s = path.read_text(encoding='utf-8')
+    s = re.sub(r'\s*/\s*<span lang="zh">.*?</span>', '', s, flags=re.S)
+    s = s.replace('Guan &amp; a little company.', 'Guan &amp; Bob (cat)')
+    s = s.replace('Guan Qiang holding a ginger cat', 'Guan Qiang with Bob the cat')
     s = re.sub(r'(<link rel="stylesheet" href="styles.css\?v=)[^"]+', r'\g<1>' + VERSION, s)
     s = s.replace('<meta name="theme-color" content="#f5f7fb">', '<meta name="theme-color" content="#fbf8f2">')
     intro = DATA['intro']
@@ -109,7 +112,6 @@ def update_index():
 
     def revise_status(match):
         return (match.group(0).replace('Under review', 'Under revision')
-                .replace('&#22312;&#25237;', '&#20462;&#25913;&#20013;')
                 .replace('Submitted manuscript under review.', 'Manuscript under revision.'))
 
     research = re.sub(r'<li><h3>Value-Aware Resource Allocation.*?</li>', revise_status, research, flags=re.S)
