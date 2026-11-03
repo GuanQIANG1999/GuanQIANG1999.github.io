@@ -9,7 +9,7 @@ A project-focused static portfolio for GitHub Pages with readable typography, a 
 - `scripts/update-cv-content.py`: standard-library renderer for CV-based sections and the printable HTML resume; preserves publication evidence separately.
 - `styles.css`: responsive layout, typography, and print styles.
 - `resume.html`: printable résumé. Use the page's **Print / Save as PDF** button to export.
-- `assets/favicon.svg`: small code-native identity mark.
+- `assets/favicon.svg`: black QG lettering on a white background; both pages version the icon URL to refresh browser caches.
 - `assets/profile.jpg`: the supplied photo, copied without modification. A larger paper-style frame preserves the entire image and its original aspect ratio.
 - `assets/illustrations/flat/`: eleven current flat system illustrations, each at 1536 × 1024, with lazy loading and about 1.4 MiB total. The earlier skeuomorphic images remain in the parent folder as source history and are not displayed.
 - `assets/models/`: precise SVG system architectures, retained behind relevant **Technical schematic** links.
