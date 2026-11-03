@@ -1,18 +1,20 @@
 # Guan Qiang — AI / ML Engineering Portfolio
 
-A project-focused static portfolio for GitHub Pages with readable typography, a warm ivory and sage palette, a larger photo in a paper-style frame, tactile system illustrations, expanded project contributions, and linked publications. No build step, package installation, database, or API key is required to serve the site.
+A project-focused static portfolio for GitHub Pages with readable typography, a warm ivory and sage palette, a larger photo in a paper-style frame, flat editorial system illustrations, concrete project contributions, and linked publications. No build step, package installation, database, or API key is required to serve the site.
 
 ## Files
 
-- `index.html`: homepage, five project case studies, expertise, publications, education, and contact.
+- `index.html`: homepage, six CV-based engineering cases, five publications/manuscripts, skills, education, awards, and contact.
+- `content/cv-portfolio.json`: current project facts, benchmarks, skills, education, and honors from the owner's 2026-11-03 CV.
+- `scripts/update-cv-content.py`: standard-library renderer for CV-based sections and the printable HTML resume; preserves publication evidence separately.
 - `styles.css`: responsive layout, typography, and print styles.
 - `resume.html`: printable résumé. Use the page's **Print / Save as PDF** button to export.
 - `assets/favicon.svg`: small code-native identity mark.
 - `assets/profile.jpg`: the supplied photo, copied without modification. A larger paper-style frame preserves the entire image and its original aspect ratio.
-- `assets/illustrations/`: eight generated skeuomorphic system illustrations, used in ten places. WebP assets preserve the full 1536 × 1024 composition, use lazy loading, and total about 1.1 MiB.
-- `assets/models/`: eight precise SVG system architectures, retained behind each illustration's **Technical schematic** link.
+- `assets/illustrations/flat/`: eleven current flat system illustrations, each at 1536 × 1024, with lazy loading and about 1.4 MiB total. The earlier skeuomorphic images remain in the parent folder as source history and are not displayed.
+- `assets/models/`: precise SVG system architectures, retained behind relevant **Technical schematic** links.
 - `scripts/prepare-illustrations.py`: optional Pillow-based asset preparation; converts generated originals to WebP and writes the illustration manifest. No website runtime dependency.
-- `docs/illustration-prompts.json`: exact built-in image-generation and correction prompts.
+- `docs/flat-illustration-prompts.json`: current built-in image-generation and correction prompts; `docs/illustration-prompts.json` records the earlier style.
 - `scripts/build-system-models.py`: standard-library generator for the shared diagram style.
 - `scripts/system-model-catalog.json`: editable titles, accessible descriptions, and source metadata for each architecture.
 - `docs/system-model-sources.md`: paper figures, method sections, and conceptual-overview provenance for each model.
@@ -39,16 +41,18 @@ The page works under a project subdirectory too because local assets use relativ
 
 ## Content decisions
 
-This portfolio targets AI/ML Engineer opportunities. Project text and résumé facts come from the owner's supplied CV. Publication statuses are retained as supplied; the AAAI 2027 submission remains labeled under review even though its arXiv preprint is public. The 2025 journal article title was corrected to the registered title, **Joint Computational Resource Allocation and Layer Partitioning for Federated Learning**, on the homepage and résumé.
+This portfolio targets Machine Learning Engineer and Applied Scientist opportunities. The latest owner-supplied CV, `CV (1).pdf` (2026-11-03), drives the six engineering cases and resume, including clinical NLP, heterogeneous-edge inference, LoRA fine-tuning, semantic video, industrial inspection, and embedded mathematical OCR. It replaces the previous procurement-automation internship description. The CV PDF itself is not published in this repository.
 
-At the owner's request, verified paper links are enabled and manuscripts without a public paper link are labeled **Under review / 在投**. Code and Demo placeholders remain noninteractive spans with `role="link"` and `aria-disabled="true"`; they have no `href` and do not enter the keyboard tab order. Sourced research results now include dataset sizes, benchmark scores, explicit baseline comparisons, and prototype configurations. Unverified project metrics remain pending. The healthcare project's CRS-Triage results are labeled as related first-author research, and the vehicular prototype results are labeled as a co-authored study. See `docs/quantitative-evidence.md` for the evidence and scope of each number.
+The linked CRS-Triage preprint is retained from the earlier publication material as additional research; it was not included in the latest CV's selected publication list. It remains labeled under review for AAAI 2027. The wireless-edge manuscript is updated to **Under revision / 修改中** according to the new CV. The 2025 journal article retains its registered title, **Joint Computational Resource Allocation and Layer Partitioning for Federated Learning**, rather than the abbreviated title in the CV.
+
+Verified paper links remain enabled; the manuscript without a public paper link has a noninteractive revision-status label. The 17 Code/Demo placeholders have `role="link"`, `aria-disabled="true"`, and no `href`. Project benchmarks are CV-reported results, while publication benchmarks retain their research-paper sources and conditions. The clinical project now reports its own 12,841 records and multimodal evaluation; the 418,100-encounter CRS-Triage cohort appears only with the paper. See `docs/quantitative-evidence.md` for provenance and scope.
 
 ## Paper links
 
 Checked on 2026-11-02 against Crossref publisher metadata, arXiv, and Western University's public faculty publication list. Google Scholar restricts automated access to the supplied profile; the profile itself is linked in the header, publication section, and contact section.
 
 - CRS-Triage: [arXiv:2608.03862](https://arxiv.org/abs/2608.03862). Public preprint; AAAI 2027 submission remains under review.
-- Value-Aware Resource Allocation and Layer Partitioning for LLM Inference at the Wireless Edge: no verified public paper URL found; under review as supplied by the owner.
+- Value-Aware Resource Allocation and Layer Partitioning for LLM Inference at the Wireless Edge: no verified public paper URL found; under revision per the 2026-11-03 CV.
 - Personalized Vehicular Health Diagnosis via Large Language Model: [DOI](https://doi.org/10.1109/MCOMSTD.2026.3674904).
 - Joint Computational Resource Allocation and Layer Partitioning for Federated Learning: [DOI](https://doi.org/10.1109/JIOT.2025.3592155).
 - Security and Efficiency Enhancement for Split Learning: [DOI](https://doi.org/10.1109/PIMRC56721.2023.10293879).
@@ -71,4 +75,4 @@ Add evidence only after confirming it can be shared publicly:
 
 To enable a resource, replace its `<span class="resource-placeholder" role="link" aria-disabled="true">` with a normal `<a href="VERIFIED_URL">` and remove the placeholder title. Each project and publication has its own resource row. Replace a project's results placeholder when real evidence is available. Avoid linking private repositories or clinical data.
 
-Update both `index.html` and `resume.html` when changing shared facts. Dates are written explicitly rather than inferred at runtime.
+Update shared facts in `content/cv-portfolio.json`, then run `python scripts/update-cv-content.py`. Update publication facts in both HTML files. Dates are written explicitly rather than inferred at runtime. To prepare new flat assets, run `python scripts/prepare-illustrations.py LOCAL_INPUTS.json --out assets/illustrations/flat --style flat`; original generated images remain in ignored local preview storage.

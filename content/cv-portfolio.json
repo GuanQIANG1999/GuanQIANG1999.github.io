@@ -1,0 +1,258 @@
+{
+  "source": {
+    "document": "CV (1).pdf",
+    "supplied": "2026-11-03",
+    "basis": "Owner-supplied CV; project metrics are reported in the CV, not independently reproduced."
+  },
+  "intro": {
+    "lead": "I build and optimize machine learning systems, from clinical data pipelines to LLMs running on edge hardware.",
+    "body": "I am a PhD candidate at Western University working across applied NLP, computer vision, distributed learning, and efficient AI systems. My experience combines Python and PyTorch model development with clinical data analysis, reproducible evaluation, and deployment on NVIDIA Jetson, Raspberry Pi, GPU servers, and secure HPC infrastructure.",
+    "opportunity": "Seeking Machine Learning Engineer and Applied Scientist opportunities",
+    "opportunity_detail": "where I can turn research and experimentation into practical, measurable AI systems."
+  },
+  "projects": [
+    {
+      "id": "healthcare",
+      "slug": "healthcare-pipeline",
+      "featured": true,
+      "kind": "Professional experience · Healthcare AI",
+      "title": "Clinical Risk Prediction & Healthcare Data Analysis",
+      "context": "Applied Machine Learning Researcher · Mitacs Accelerate · Jan 2026 – Present",
+      "organization": "Western University / CAMH / Kelello Health, Canada",
+      "overview": "Clinical risk prediction requires extracting useful evidence from incomplete structured records and unstructured notes. I built an end-to-end pipeline covering data preparation, clinical text analysis, feature extraction, model training, and evaluation across three risk categories.",
+      "contributions": [
+        "Processed 12,841 emergency department records, including 7,924 labeled encounters, for clinical risk modeling.",
+        "Combined clinical-note features with structured patient data, evaluating Logistic Regression, Random Forest, XGBoost, TF–IDF text models, and multimodal fusion.",
+        "Addressed class imbalance and missing clinical evidence; compared the multimodal approach with a structured-data XGBoost baseline.",
+        "Built reproducible workflows with Python, scikit-learn, XGBoost, PostgreSQL, and MLflow in a secure HPC environment, with reusable NLP and evaluation components for future transformer integration."
+      ],
+      "value": "Connects clinical data processing, multimodal modeling, and reproducible evaluation in the intended secure computing environment.",
+      "metrics": [
+        [
+          "12,841",
+          "Emergency department records; 7,924 labeled encounters"
+        ],
+        [
+          "66.3%",
+          "Classification accuracy; structured baseline 57.3%"
+        ],
+        [
+          "0.628",
+          "Macro-F1; structured baseline 0.461"
+        ]
+      ],
+      "metric_context": "Three-category clinical risk prediction. Relative Macro-F1 improvement is approximately 36% over the structured-data XGBoost baseline. This clinical project evaluation is separate from the CRS-Triage paper benchmark below.",
+      "note": "Additional longitudinal analysis: 19,323 GAD-7 and 25,757 PHQ-9 assessments, identifying 901 and 1,481 follow-up pairs respectively.",
+      "topics": "Clinical NLP, multimodal learning, scikit-learn, XGBoost, PostgreSQL, MLflow, HPC",
+      "source_pages": "1–2"
+    },
+    {
+      "id": "edge-inference",
+      "slug": "edge-inference-system",
+      "kind": "Selected engineering project · Edge AI",
+      "title": "Low-Latency LLM Inference on Heterogeneous Edge Devices",
+      "context": "2025 – 2026",
+      "overview": "Concurrent LLM requests can strain device memory, compute capacity, and network bandwidth. I built a distributed inference system spanning two NVIDIA Jetson Orin Nano devices, three Raspberry Pi 5 gateways, and a GPU server.",
+      "contributions": [
+        "Implemented transformer model partitioning, remote inference, and asynchronous communication across heterogeneous hosts.",
+        "Developed dynamic scheduling for layer placement, GPU utilization, and network bandwidth allocation.",
+        "Optimized GPU execution, communication overhead, and KV-cache management.",
+        "Automated latency, throughput, GPU-memory, and energy benchmarking with Python and PyTorch for 10 concurrent clients and 20 transformer layers."
+      ],
+      "value": "Brings model execution, communication, and resource scheduling together for serving LLMs on constrained edge hardware.",
+      "metrics": [
+        [
+          "−40.1%",
+          "P95 time-to-first-token; 1.82 s → 1.09 s"
+        ],
+        [
+          "+54.0%",
+          "Average throughput; 12.6 → 19.4 tokens/s"
+        ],
+        [
+          "−24.8%",
+          "Reported energy consumption per request"
+        ]
+      ],
+      "metric_context": "Benchmark: 10 concurrent clients and 20 transformer layers. P95 TTFT is compared with static model partitioning; average throughput increased from 12.6 to 19.4 tokens/s, with 24.8% lower energy consumption per request.",
+      "topics": "Python, PyTorch, NVIDIA Jetson, Raspberry Pi, split inference, asynchronous communication, KV cache",
+      "source_pages": "2"
+    },
+    {
+      "id": "lora-finetuning",
+      "slug": "lora-finetuning",
+      "kind": "Selected engineering project · Efficient training",
+      "title": "Memory-Efficient LLM Fine-Tuning on Jetson Edge Devices",
+      "context": "2026",
+      "overview": "Adapting LLMs on heterogeneous edge hardware requires controlling GPU-memory use and communication cost. I built a distributed fine-tuning framework spanning Jetson Orin Nano, Raspberry Pi gateways, and GPU servers.",
+      "contributions": [
+        "Integrated PyTorch, Hugging Face Transformers, LoRA, and low-bit quantization for resource-efficient model adaptation.",
+        "Implemented hardware-aware LoRA rank selection with 4-bit and 8-bit quantization.",
+        "Developed adaptive resource scheduling and efficiency-weighted model aggregation.",
+        "Optimized low-rank adapter synchronization and built reproducible training/evaluation workflows with MLflow."
+      ],
+      "value": "Enables model adaptation within edge-memory budgets while reducing training time and parameter-transfer overhead.",
+      "metrics": [
+        [
+          "2.9 GB",
+          "Peak GPU memory; 3.7 GB → 2.9 GB (−21.6%)"
+        ],
+        [
+          "−24.2%",
+          "Fine-tuning wall time versus fixed-rank LoRA"
+        ],
+        [
+          "−31.4%",
+          "Communication versus conventional federated LoRA"
+        ]
+      ],
+      "metric_context": "Fine-tuning wall time was also 10.7% lower than HetLoRA, with model performance within 0.5 percentage points of a full-precision reference. Memory, time, and communication comparisons retain their respective baselines.",
+      "topics": "PyTorch, Hugging Face, LoRA, quantization, adaptive scheduling, federated adaptation, MLflow",
+      "source_pages": "2–3"
+    },
+    {
+      "id": "semantic-video",
+      "slug": "semantic-video",
+      "kind": "Selected engineering project · Embedded vision",
+      "title": "Real-Time Semantic Video Streaming on NVIDIA Jetson",
+      "context": "2026",
+      "overview": "Industrial video monitoring must preserve useful visual content under limited bandwidth and changing channel quality. I deployed a neural video communication system on two NVIDIA Jetson Orin Nano devices.",
+      "contributions": [
+        "Integrated PyTorch neural encoding/decoding, CUDA acceleration, TCP communication, and PyQt5 monitoring interfaces.",
+        "Implemented two concurrent 256 × 256 video streams with end-to-end embedded-GPU processing.",
+        "Developed semantic compression and evaluated reconstruction across varying signal-to-noise ratios.",
+        "Integrated configurable SNR controls, real-time visualization, GPU inference, and network communication into one distributed application."
+      ],
+      "value": "Combines embedded inference, neural compression, and network engineering in a working video-monitoring system.",
+      "metrics": [
+        [
+          "≈5 FPS",
+          "Two concurrent 256 × 256 streams"
+        ],
+        [
+          "190 ms",
+          "End-to-end processing latency per frame"
+        ],
+        [
+          "8:1",
+          "Compression; 87.5% less data than raw RGB"
+        ]
+      ],
+      "metric_context": "Under noisy-channel conditions, reconstruction improved by 2.9 dB in PSNR and SSIM increased from 0.81 to 0.89 versus a conventional transmission baseline. The 8:1 compression ratio is compared with uncompressed RGB video.",
+      "topics": "NVIDIA Jetson, PyTorch, CUDA, TCP, PyQt5, semantic communication, PSNR, SSIM",
+      "source_pages": "3"
+    },
+    {
+      "id": "industrial-defect",
+      "slug": "industrial-defect",
+      "kind": "Professional experience · Computer vision",
+      "title": "Industrial Surface Defect Detection",
+      "context": "Computer Vision Engineer Intern · Jun 2021 – Sep 2021",
+      "organization": "NS Solutions · Shanghai, China",
+      "overview": "Manufacturing quality control requires identifying surface abnormalities quickly and consistently. I developed a deep-learning computer vision system for automated industrial surface inspection.",
+      "contributions": [
+        "Integrated image preprocessing, feature extraction, defect localization, and classification into an inspection pipeline.",
+        "Evaluated precision and recall for detecting surface abnormalities.",
+        "Optimized image processing and model inference to support efficient defect screening and reduce reliance on manual inspection."
+      ],
+      "value": "Applies computer vision and inference optimization to a concrete manufacturing quality-control workflow.",
+      "metrics": [
+        [
+          ">93.2%",
+          "Reported defect-detection precision"
+        ],
+        [
+          ">90.1%",
+          "Reported defect-detection recall"
+        ],
+        [
+          "<120 ms",
+          "Image processing and inference per image"
+        ]
+      ],
+      "metric_context": "Evaluation of industrial surface-abnormality detection, with the image processing and inference pipeline optimized for automated quality inspection.",
+      "topics": "Computer vision, deep learning, image preprocessing, defect localization, inference optimization",
+      "source_pages": "2"
+    },
+    {
+      "id": "formula-recognition",
+      "slug": "formula-recognition",
+      "kind": "Selected engineering project · Document AI",
+      "title": "Deep Learning-Based Mathematical OCR on NVIDIA Jetson",
+      "context": "2021",
+      "overview": "Mathematical expressions in scanned documents require recognizing both symbols and their spatial structure. I built an end-to-end system that detects formulas and converts them into editable LaTeX.",
+      "contributions": [
+        "Integrated Python, OpenCV, PyTorch, and YOLOv5 for formula detection, preprocessing, sequence recognition, and LaTeX generation.",
+        "Implemented a CNN–Transformer recognizer for symbol and mathematical-structure recognition.",
+        "Deployed inference on NVIDIA Jetson Nano with Raspberry Pi image acquisition.",
+        "Used TensorRT and FP16 to optimize embedded inference, and connected localization with structured expression generation and editable export."
+      ],
+      "value": "Connects visual recognition with embedded deployment and reusable, editable mathematical output.",
+      "metrics": [
+        [
+          "94.2%",
+          "Formula detection mAP@0.5"
+        ],
+        [
+          "86.5%",
+          "Expression-level LaTeX exact match"
+        ],
+        [
+          "1.15 s",
+          "Latency per image; 1.74 s → 1.15 s"
+        ]
+      ],
+      "metric_context": "Symbol-recognition accuracy was 96.1%. TensorRT and FP16 optimization reduced end-to-end latency by 33.9%, from 1.74 to 1.15 seconds per image. Detection mAP, symbol accuracy, and expression exact match are separate measures.",
+      "topics": "Python, OpenCV, PyTorch, YOLOv5, CNN–Transformer, TensorRT, FP16, Jetson Nano",
+      "source_pages": "3"
+    }
+  ],
+  "skills": [
+    [
+      "Programming & data",
+      "Python, Java, SQL, MATLAB; pandas, NumPy, SciPy; data cleaning, exploratory analysis, feature engineering, statistical evaluation"
+    ],
+    [
+      "Machine learning",
+      "PyTorch, scikit-learn, XGBoost, Hugging Face Transformers; classification, NLP, model selection, cross-validation, imbalance handling, uncertainty-aware prediction"
+    ],
+    [
+      "LLMs & optimization",
+      "LoRA / parameter-efficient fine-tuning, quantization, split inference, federated learning, reinforcement learning, resource allocation, Lyapunov optimization"
+    ],
+    [
+      "Engineering & tools",
+      "Linux, Git, MLflow, PostgreSQL, Flask, FastAPI, Gradio, Streamlit; GPU computing and HPC"
+    ],
+    [
+      "Edge deployment",
+      "NVIDIA Jetson, Raspberry Pi, TensorRT, FP16, CUDA, TCP communication, PyQt5"
+    ]
+  ],
+  "education": [
+    {
+      "degree": "PhD Candidate, Electrical and Computer Engineering",
+      "institution": "Western University",
+      "location": "London, Ontario, Canada",
+      "dates": "Sep 2022 – Present",
+      "gpa": "91%",
+      "courses": "Machine Learning, Deep Learning, Reinforcement Learning, Convex Optimization, Distributed Computing, Wireless Communication Systems, Statistical Learning, Advanced Algorithms"
+    },
+    {
+      "degree": "B.Eng., Computer Science and Technology",
+      "institution": "Shanghai University",
+      "location": "Shanghai, China",
+      "dates": "Sep 2018 – Jun 2022",
+      "gpa": "87/100",
+      "courses": "Data Structures and Algorithms, Artificial Intelligence, Computer Vision and Image Processing, Probability and Statistics, Linear Algebra, Database Systems, Operating Systems, Computer Networks, Software Engineering"
+    }
+  ],
+  "awards": [
+    "Mitacs Innovation Awards Nominee · Mitacs Canada (2026)",
+    "Special Award, Enterprise Track, Global AI + Radio Challenge · International AI and Wireless Communication Competition (2026)",
+    "Advanced to Second Round, AI Data Scientist Competition · China Merchants Bank, 10th Digital Finance Training Camp (2026)",
+    "Mitacs Accelerate Research Funding · Mitacs Canada (2026)",
+    "Fourth Place, Shanghai Innovation and Entrepreneurship Competition (2021)",
+    "Second-Class Academic Scholarship, Shanghai University (2019)"
+  ]
+}

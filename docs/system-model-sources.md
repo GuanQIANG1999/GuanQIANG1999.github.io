@@ -1,10 +1,12 @@
 # System architecture illustrations
 
-The page now displays eight tactile, skeuomorphic illustrations in ten places: all five projects and all five publications. They were created with the built-in image-generation tool, using the first healthcare illustration as the style reference for the remaining topics. Exact generation and correction prompts are retained in `docs/illustration-prompts.json`; asset metadata is in `assets/illustrations/manifest.json`. Generated mathematical decorations in two images were removed with targeted image edits before publication.
+The page displays eleven flat editorial illustrations: six CV-based engineering cases and five publications. They were created with the built-in image-generation tool, using the flat healthcare illustration as the style reference. Exact prompts are in `docs/flat-illustration-prompts.json`; current metadata is in `assets/illustrations/flat/manifest.json`. The earlier skeuomorphic images and prompts remain as source history. Direction markers in the federated-learning illustration were removed with a targeted edit so the overview represents bidirectional connections without incorrectly directed arrows.
 
 The illustrations use devices, servers, chips, records, dials, and storage objects as explanatory metaphors. They do not establish actual hardware inventories, measured deployment topology, production clinical use, or an evaluation result. Labels and captions identify the relevant system concepts. The vehicular study's proposed satellite connectivity remains distinct from its measured local-network prototype in the adjacent study text.
 
-Eight precise SVG architectures remain accessible through **Technical schematic** links under the illustrations. Where a project and publication describe the same research, they share the same illustration and schematic. Every SVG uses a 1200 × 760 canvas, common typography, modules, arrow conventions, and semantic palette.
+Seven precise SVG architectures remain linked where relevant. Existing SVG files use a 1200 × 760 canvas and common typography, modules, arrows, and semantic palette. The new heterogeneous-device inference project has its own illustration, separate from the wireless-edge manuscript's conceptual architecture; their evaluation results are not merged.
+
+The six engineering illustrations use the owner's 2026-11-03 CV: clinical NLP/HPC; two Jetson devices, three Raspberry Pi gateways and a GPU server for inference; heterogeneous LoRA adaptation; two Jetson video endpoints; industrial surface inspection; and Raspberry Pi acquisition with Jetson Nano mathematical OCR. These are explanatory compositions, not deployment photographs or detailed implementation specifications. New standalone SVG schematics have not been asserted for projects without supplied specifications.
 
 The diagrams distinguish devices and server hosts, application or model components, data stores, and deployment or trust boundaries. They are architectural views rather than numbered processing steps. Clinical model internals use a model architecture; projects without full implementation specifications use explicitly conceptual logical architectures. Host placement is shown only where supported by the supplied description or paper.
 
@@ -34,7 +36,7 @@ These are explanatory system schematics, not charts of measured results. The IEE
 - Public reference: <https://doi.org/10.1109/JIOT.2025.3592155>.
 - Preserved structure: heterogeneous clients retain local data and prefix layers; a central server contains the controller, shared CPU pool, and per-client model tails. Per-client split points and server computational shares are jointly selected. Activations and gradients use distinct connections across the client/server boundary.
 - Controller label summarizes the optimization-based method for profiled conditions and modified TD3 for uncertain system parameters. No fixed split positions or measured resource shares are invented.
-- Reused for the distributed-learning project and the 2025 publication. The project's separate security research is illustrated in the PIMRC paper, rather than implying one combined, evaluated system.
+- Used with the 2025 publication. The separate security research is illustrated in the PIMRC paper, without implying one combined evaluated system.
 
 ### Personalized vehicular health diagnosis
 
@@ -57,9 +59,9 @@ These are explanatory system schematics, not charts of measured results. The IEE
 The remaining diagrams use the owner's supplied project descriptions. Detailed manuscripts or implementation specifications were not available for these cases, so their captions identify them as logical or conceptual architectures. These are explanatory module decompositions, not claims of a verified production topology.
 
 - `healthcare-pipeline.svg`: clinical-input boundary and secure HPC deployment boundary, with clinical-record storage, evidence-quality constraints, preprocessing, feature extraction, risk models, evaluation, and analysis-output storage.
-- `edge-llm.svg`: device host, wireless network, edge-server host, and value-aware coordinator. Prefix and remaining model layers are placed on their respective hosts; response and resource-control connections are separate. Reused for the project and corresponding under-review manuscript; the full manuscript was not supplied.
+- `edge-llm.svg`: device host, wireless network, edge-server host, and value-aware coordinator for the manuscript under revision. This remains separate from the new CV's deployed heterogeneous-device inference project; the full manuscript was not supplied.
 - `formula-recognition.svg`: external document input and editable-LaTeX output around an application boundary containing a localizer, symbol recognizer, two-dimensional structure parser, and serializer. The fraction is an illustrative output-format example.
-- `commerce-automation.svg`: internal users and SQL storage outside a Java/Spring Boot application boundary. The application contains an interface, three business modules, and persistence access. It does not specify unverified endpoints, schemas, frameworks beyond Spring Boot, or deployment services.
+- `commerce-automation.svg`: legacy procurement schematic from the earlier project description, retained as source history and no longer linked from the homepage after the latest CV update.
 
 ## Rebuild
 

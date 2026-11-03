@@ -106,7 +106,6 @@ h1, h2, h3 { font-family: var(--heading); }
 .metric-card { padding: 15px 16px; border: 1px solid #e1e8d9; border-radius: 14px; background: #f1f6ed; min-width: 0; }
 .metric-value { display: block; color: #2d6654; font-size: 30px; line-height: 1.25; font-weight: 650; letter-spacing: -.6px; }
 .metric-label { display: block; margin-top: 8px; font-size: 15px; color: #526e63; line-height: 1.65; }
-.project:not(.project-featured) .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .research-results .metric-context, .publication-list .research-results .metric-context { color: #627078; margin-top: 13px; font-size: 15px; line-height: 1.85; }
 .metric-source { display: inline-block; font-size: 15px; margin-top: 9px; }
 .research-results + .research-results { margin-top: 20px; }

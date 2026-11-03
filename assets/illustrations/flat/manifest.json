@@ -1,0 +1,207 @@
+[
+  {
+    "slug": "healthcare-pipeline",
+    "title": "Clinical Risk Prediction & Healthcare Data Analysis",
+    "labels": [
+      "Clinical data",
+      "Secure HPC",
+      "Risk evaluation"
+    ],
+    "alt": "Flat clinical records and notes connect to secure HPC computation, a model component, and a risk-evaluation workstation.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "owner-supplied-cv",
+    "source_sha256": "158e7d1b2169fbddebdaaff3f0e83714e8af1eb1f9d34131faafeef01cbdcb4b",
+    "file": "assets/illustrations/flat/healthcare-pipeline.webp",
+    "bytes": 178266,
+    "technical_schematic": "assets/models/healthcare-pipeline.svg"
+  },
+  {
+    "slug": "edge-inference-system",
+    "title": "Low-Latency LLM Inference on Heterogeneous Edge Devices",
+    "labels": [
+      "Edge devices",
+      "Async gateways",
+      "GPU server"
+    ],
+    "alt": "A flat system illustration connects two Jetson edge boards through Raspberry Pi gateways to a GPU server. Model-layer tiles and a scheduler indicate partitioned inference and resource coordination.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "owner-supplied-cv",
+    "source_sha256": "8121a97150b921b2725db30a31b0ec687cf4fb1450a515b58b541b25c52fd37b",
+    "file": "assets/illustrations/flat/edge-inference-system.webp",
+    "bytes": 145474
+  },
+  {
+    "slug": "lora-finetuning",
+    "title": "Memory-Efficient LLM Fine-Tuning on Jetson Edge Devices",
+    "labels": [
+      "Edge fine-tuning",
+      "Adaptive LoRA",
+      "Server aggregation"
+    ],
+    "alt": "Flat Jetson and gateway boards connect to a GPU server. Small adapter overlays on model tiles represent adaptive LoRA and parameter-efficient synchronization.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "owner-supplied-cv",
+    "source_sha256": "e6538f7094b075a8f63ff71d4fc0429193ce3e3ca747799e6900657927530db2",
+    "file": "assets/illustrations/flat/lora-finetuning.webp",
+    "bytes": 135206
+  },
+  {
+    "slug": "semantic-video",
+    "title": "Real-Time Semantic Video Streaming on NVIDIA Jetson",
+    "labels": [
+      "Neural encoding",
+      "TCP transport",
+      "Video reconstruction"
+    ],
+    "alt": "Two flat Jetson edge devices are linked by a communication path. A camera and two video views feed the encoder; a decoder and monitoring display reconstruct the received video.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "owner-supplied-cv",
+    "source_sha256": "d17105a6cab4fd37476ef577fdf9e4537b70141ff0a77942dde3aa19f2ea75a5",
+    "file": "assets/illustrations/flat/semantic-video.webp",
+    "bytes": 126064
+  },
+  {
+    "slug": "industrial-defect",
+    "title": "Industrial Surface Defect Detection",
+    "labels": [
+      "Surface imaging",
+      "Defect detection",
+      "Quality inspection"
+    ],
+    "alt": "A flat industrial camera examines a metal panel on a conveyor. An inference workstation displays localized surface defects for automated quality inspection.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "owner-supplied-cv",
+    "source_sha256": "86201b0568924a50e0758f41111ff2c31a6ab869c6e1a20814bbc59b3298b347",
+    "file": "assets/illustrations/flat/industrial-defect.webp",
+    "bytes": 110366
+  },
+  {
+    "slug": "formula-recognition",
+    "title": "Deep Learning-Based Mathematical OCR on NVIDIA Jetson",
+    "labels": [
+      "Document acquisition",
+      "Jetson OCR",
+      "Editable LaTeX"
+    ],
+    "alt": "A scanned mathematical expression and Raspberry Pi acquisition board connect to a Jetson Nano running visual recognition. A display shows the editable LaTeX expression.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "owner-supplied-cv",
+    "source_sha256": "01f738352823cc9a5864b909898729c2e09069fed083248dd6b5d14afd7033de",
+    "file": "assets/illustrations/flat/formula-recognition.webp",
+    "bytes": 97514,
+    "technical_schematic": "assets/models/formula-recognition.svg"
+  },
+  {
+    "slug": "crs-triage",
+    "title": "CRS-Triage",
+    "labels": [
+      "Clinical evidence",
+      "Reliability-aware fusion",
+      "Predict or defer"
+    ],
+    "alt": "Separate structured-record and clinical-text branches connect to reliability-aware evidence fusion. The output splits between an acuity prediction and deferred review.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "paper",
+    "source_sha256": "e66693cd0b95b2eeb707b6070b0c136acbef4fc5374af69ca82c3fe3613cdbfc",
+    "file": "assets/illustrations/flat/crs-triage.webp",
+    "bytes": 130996,
+    "technical_schematic": "assets/models/crs-triage.svg"
+  },
+  {
+    "slug": "edge-llm",
+    "title": "Value-Aware LLM Inference at the Wireless Edge",
+    "labels": [
+      "Device-side model",
+      "Wireless link",
+      "Edge-side model"
+    ],
+    "alt": "A device runs prefix model layers and communicates with an edge server running the remaining layers. A value-aware coordinator connects to model placement and resource controls.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "paper",
+    "source_sha256": "a4b3f260e806d32ed9cc32c69347714a5d169541f27a34ba40f2210f3f398546",
+    "file": "assets/illustrations/flat/edge-llm.webp",
+    "bytes": 115414,
+    "technical_schematic": "assets/models/edge-llm.svg"
+  },
+  {
+    "slug": "federated-partitioning",
+    "title": "Resource-Aware Federated Learning",
+    "labels": [
+      "Private client data",
+      "Shared server compute",
+      "Joint allocation"
+    ],
+    "alt": "Three client laptops retain local data and prefix layers. Bidirectional links connect them to a shared server with per-client model tails and a compute-allocation controller.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "paper",
+    "source_sha256": "2585a02c1073d5234fde15bc9c96a1fbf28fc3497aef2a34073c56148c75526b",
+    "file": "assets/illustrations/flat/federated-partitioning.webp",
+    "bytes": 164958,
+    "technical_schematic": "assets/models/federated-partitioning.svg"
+  },
+  {
+    "slug": "vehicular-llm",
+    "title": "Personalized Vehicular LLM Diagnosis",
+    "labels": [
+      "On-board intelligence",
+      "Communication network",
+      "Cloud diagnosis"
+    ],
+    "alt": "A flat vehicle with on-board inference connects through a terrestrial and proposed satellite-network concept to cloud diagnosis, retrieval, and curated expert feedback.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "paper",
+    "source_sha256": "b5cbbd365440efaec0cb53e8c9cbaaf090243fca4e1b751e5eb2ce6e3d6e0be2",
+    "file": "assets/illustrations/flat/vehicular-llm.webp",
+    "bytes": 128354,
+    "technical_schematic": "assets/models/vehicular-llm.svg"
+  },
+  {
+    "slug": "split-learning-security",
+    "title": "Secure Split-Learning Admission",
+    "labels": [
+      "Client requests",
+      "Admission gateway",
+      "Protected training"
+    ],
+    "alt": "A client sends requests through a risk-scoring and proof-of-work admission gateway. Accepted requests reach the protected server; rejected requests enter a blocklist tray.",
+    "width": 1536,
+    "height": 1024,
+    "representation": "flat-system-illustration",
+    "source": "Built-in image_gen; explanatory visual metaphor",
+    "source_type": "paper",
+    "source_sha256": "c2d8c8d8c5f8097945b407cde7d6dca3cb2e0e01e832c673fc1034886fe7b859",
+    "file": "assets/illustrations/flat/split-learning-security.webp",
+    "bytes": 130966,
+    "technical_schematic": "assets/models/split-learning-security.svg"
+  }
+]
